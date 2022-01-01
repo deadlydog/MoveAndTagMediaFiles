@@ -26,8 +26,5 @@
 		<Style TargetType="{x:Type ListBox}">
 			<Setter Property="ToolTipService.ShowDuration" Value="60000" />
 		</Style>
-		<Style TargetType="{x:Type extToolkit:IntegerUpDown}">
-			<Setter Property="ToolTipService.ShowDuration" Value="60000" />
-		</Style>
 	</Application.Resources>
 </Application>
