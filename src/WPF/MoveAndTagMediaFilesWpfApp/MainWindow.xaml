@@ -1,0 +1,73 @@
+<Window x:Class="MoveAndTagMediaFilesWpfApp.MainWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:MoveAndTagMediaFilesWpfApp"
+		mc:Ignorable="d"
+		Title="Move and Tag Media Files"
+		Height="450" Width="800">
+	<Grid Margin="5">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="5" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="5" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<GroupBox Grid.Row="0" Header="Options">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="5"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="5"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="5"/>
+				</Grid.RowDefinitions>
+
+				<Grid Grid.Row="1">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="5"/>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="5" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="40" />
+					</Grid.ColumnDefinitions>
+
+					<TextBlock Grid.Row="0" Grid.Column="0" Text="Source Directory:" ToolTip="The root directory to look for files and/or directories in." />
+					<TextBox Grid.Row="0" Grid.Column="2" x:Name="txtSourceDirectory" HorizontalAlignment="Stretch" ToolTip="The directory to look for files and/or directories in." />
+					<Button Grid.Row="0" Grid.Column="3" Content="..." x:Name="btnBrowseForSourceDirectory" Click="btnBrowseForSourceDirectory_Click" ToolTip="Browse for a directory to look for media files in." />
+
+					<TextBlock Grid.Row="2" Grid.Column="0" Text="Destination Directory:" ToolTip="The directory copy or move files to." />
+					<TextBox Grid.Row="2" Grid.Column="2" x:Name="txtDestinationDirectory" HorizontalAlignment="Stretch" ToolTip="The directory to copy or move files to." />
+					<Button Grid.Row="2" Grid.Column="3" Content="..." x:Name="btnBrowseForDestinationDirectory" Click="btnBrowseForDestinationDirectory_Click" ToolTip="Browse for a directory to copy or move the files to." />
+				</Grid>
+
+				<Grid Grid.Row="3">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="5" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+
+					<DockPanel Grid.Column="0">
+						<TextBlock Text="Included File Patterns:" Margin="0,0,5,0" />
+						<TextBox x:Name="txtIncludedFilePatterns" HorizontalAlignment="Stretch" Text="*.*" ToolTip="The file patterns to match." />
+					</DockPanel>
+					
+					<CheckBox Grid.Column="2" x:Name="chkPreserveDirectoryStructure" Content="Preserve Directory Structure" VerticalAlignment="Center" ToolTip="If checked, files copied/moved from the Source Directory to the Destination Directory will be placed in the same relative subdirectory path, rather than directly in the root Destination Directory." />
+				</Grid>
+			</Grid>
+		</GroupBox>
+
+		<GroupBox Grid.Row="2" Header="Media Preview">
+			
+		</GroupBox>
+	</Grid>
+</Window>
