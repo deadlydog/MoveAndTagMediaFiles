@@ -19,4 +19,11 @@ public partial class MainWindow : Window
 	{
 
 	}
+
+	private void btnFindFiles_Click(object sender, RoutedEventArgs e)
+	{
+		var searchOptions = SearchOptions.FromApplicationSettings(ApplicationSettings.Instance);
+
+
+	}
 }
