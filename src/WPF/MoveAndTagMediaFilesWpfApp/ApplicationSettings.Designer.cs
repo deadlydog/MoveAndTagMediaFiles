@@ -86,60 +86,60 @@ namespace MoveAndTagMediaFilesWpfApp {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SearchOption_SourceDirectory {
+        public string FileSearchSettings_SourceDirectory {
             get {
-                return ((string)(this["SearchOption_SourceDirectory"]));
+                return ((string)(this["FileSearchSettings_SourceDirectory"]));
             }
             set {
-                this["SearchOption_SourceDirectory"] = value;
+                this["FileSearchSettings_SourceDirectory"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SearchOption_DestinationDirectory {
+        public string FileSearchSettings_DestinationDirectory {
             get {
-                return ((string)(this["SearchOption_DestinationDirectory"]));
+                return ((string)(this["FileSearchSettings_DestinationDirectory"]));
             }
             set {
-                this["SearchOption_DestinationDirectory"] = value;
+                this["FileSearchSettings_DestinationDirectory"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SearchOption_FileSearchPattern {
+        public string FileSearchSettings_FileSearchPattern {
             get {
-                return ((string)(this["SearchOption_FileSearchPattern"]));
+                return ((string)(this["FileSearchSettings_FileSearchPattern"]));
             }
             set {
-                this["SearchOption_FileSearchPattern"] = value;
+                this["FileSearchSettings_FileSearchPattern"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool SearchOption_SearchSubdirectories {
+        public bool FileSearchSettings_SearchSubdirectories {
             get {
-                return ((bool)(this["SearchOption_SearchSubdirectories"]));
+                return ((bool)(this["FileSearchSettings_SearchSubdirectories"]));
             }
             set {
-                this["SearchOption_SearchSubdirectories"] = value;
+                this["FileSearchSettings_SearchSubdirectories"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool SearchOption_PreserveDirectoryStructure {
+        public bool FileSearchSettings_PreserveDirectoryStructure {
             get {
-                return ((bool)(this["SearchOption_PreserveDirectoryStructure"]));
+                return ((bool)(this["FileSearchSettings_PreserveDirectoryStructure"]));
             }
             set {
-                this["SearchOption_PreserveDirectoryStructure"] = value;
+                this["FileSearchSettings_PreserveDirectoryStructure"] = value;
             }
         }
     }

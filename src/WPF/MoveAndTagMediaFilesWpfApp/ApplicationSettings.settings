@@ -17,19 +17,19 @@
     <Setting Name="WindowState" Type="System.String" Scope="User">
       <Value Profile="(Default)">Normal</Value>
     </Setting>
-    <Setting Name="SearchOption_SourceDirectory" Type="System.String" Scope="User">
+    <Setting Name="FileSearchSettings_SourceDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="SearchOption_DestinationDirectory" Type="System.String" Scope="User">
+    <Setting Name="FileSearchSettings_DestinationDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="SearchOption_FileSearchPattern" Type="System.String" Scope="User">
+    <Setting Name="FileSearchSettings_FileSearchPattern" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="SearchOption_SearchSubdirectories" Type="System.Boolean" Scope="User">
+    <Setting Name="FileSearchSettings_SearchSubdirectories" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="SearchOption_PreserveDirectoryStructure" Type="System.Boolean" Scope="User">
+    <Setting Name="FileSearchSettings_PreserveDirectoryStructure" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>

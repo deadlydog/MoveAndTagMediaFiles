@@ -8,7 +8,7 @@ namespace MoveAndTagMediaFiles;
 
 public class FileRetriever
 {
-	public static IEnumerable<string> GetFilePaths(SearchOptions searchOptions)
+	public static IEnumerable<string> GetFilePaths(FileSearchSettings searchOptions)
 	{
 		var directorySearchOptions = new EnumerationOptions()
 		{

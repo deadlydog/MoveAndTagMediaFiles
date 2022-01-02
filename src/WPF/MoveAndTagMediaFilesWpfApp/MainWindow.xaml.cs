@@ -47,11 +47,14 @@ public partial class MainWindow : Window
 	{
 		btnFindFiles.IsEnabled = false;
 		txtStatus.Text = "Searching for files...";
+
+		// Get settings from the UI before doing any potentially long-running operations where the user might change the UI values.
+		var fileSearchSettings = GetFileSearchSettingsFromUi();
+		var previewSettings = GetPreviewSettingsFromUi();
+
 		try
 		{
-			var searchOptions = GetSearchOptionsFromUi();
-			var filePaths = FileRetriever.GetFilePaths(searchOptions);
-
+			var filePaths = FileRetriever.GetFilePaths(fileSearchSettings);
 		}
 		catch (Exception ex)
 		{
@@ -61,16 +64,25 @@ public partial class MainWindow : Window
 		txtStatus.Text = string.Empty;
 	}
 
-	private SearchOptions GetSearchOptionsFromUi()
+	private FileSearchSettings GetFileSearchSettingsFromUi()
 	{
-		var searchOptions = new SearchOptions()
+		var searchSettings = new FileSearchSettings()
+		{
+			SourceDirectory = txtSourceDirectory.Text,
+			FileSearchPattern = txtFileSearchPattern.Text,
+			SearchSubdirectories = chkSearchSubdirectories.IsChecked ?? true
+		};
+		return searchSettings;
+	}
+
+	private PreviewSettings GetPreviewSettingsFromUi()
+	{
+		var previewSettings = new PreviewSettings()
 		{
 			SourceDirectory = txtSourceDirectory.Text,
 			DestinationDirectory = txtDestinationDirectory.Text,
-			FileSearchPattern = txtFileSearchPattern.Text,
-			SearchSubdirectories = chkSearchSubdirectories.IsChecked ?? true,
 			PreserveDirectoryStructure = chkPreserveDirectoryStructure.IsChecked ?? true
 		};
-		return searchOptions;
+		return previewSettings;
 	}
 }
