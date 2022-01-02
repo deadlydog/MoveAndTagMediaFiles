@@ -44,7 +44,7 @@ public partial class App : Application
 		//};
 	}
 
-	void ShowUnhandledException(Exception e, string unhandledExceptionType, bool promptUserForShutdown)
+	private void ShowUnhandledException(Exception e, string unhandledExceptionType, bool promptUserForShutdown)
 	{
 		var messageBoxTitle = $"Unexpected Error Occurred: {unhandledExceptionType}";
 		var messageBoxMessage = $"The following exception occurred:\n\n{e}";
@@ -61,5 +61,11 @@ public partial class App : Application
 		{
 			Application.Current.Shutdown();
 		}
+	}
+
+	private void Application_Exit(object sender, ExitEventArgs e)
+	{
+		// Save any application settings that were changed when exiting (such as window size and position).
+		ApplicationSettings.Default.Save();
 	}
 }

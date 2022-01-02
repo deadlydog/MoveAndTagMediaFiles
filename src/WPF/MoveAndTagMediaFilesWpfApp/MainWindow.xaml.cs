@@ -7,6 +7,14 @@ public partial class MainWindow : Window
 	public MainWindow()
 	{
 		InitializeComponent();
+		this.DataContext = this;
+
+		SetWindowTitle();
+	}
+
+	private void SetWindowTitle()
+	{
+		this.Title += " v" + System.Reflection.Assembly.GetEntryAssembly()?.GetName().Version?.ToString(3);
 	}
 
 	private void btnBrowseForSourceDirectory_Click(object sender, RoutedEventArgs e)
@@ -41,7 +49,7 @@ public partial class MainWindow : Window
 		txtStatus.Text = "Searching for files...";
 		try
 		{
-			var searchOptions = ApplicationSettings.Instance.ToSearchOptions();
+			var searchOptions = GetSearchOptionsFromUi();
 			var filePaths = FileRetriever.GetFilePaths(searchOptions);
 
 		}
@@ -53,13 +61,16 @@ public partial class MainWindow : Window
 		txtStatus.Text = string.Empty;
 	}
 
-	private async void Window_Loaded(object sender, RoutedEventArgs e)
+	private SearchOptions GetSearchOptionsFromUi()
 	{
-		ApplicationSettings.Instance = await ApplicationSettingsManager.LoadSettings();
-	}
-
-	private async void Window_Closed(object sender, EventArgs e)
-	{
-		await ApplicationSettingsManager.SaveSettings(ApplicationSettings.Instance);
+		var searchOptions = new SearchOptions()
+		{
+			SourceDirectory = txtSourceDirectory.Text,
+			DestinationDirectory = txtDestinationDirectory.Text,
+			FileSearchPattern = txtFileSearchPattern.Text,
+			SearchSubdirectories = chkSearchSubdirectories.IsChecked ?? true,
+			PreserveDirectoryStructure = chkPreserveDirectoryStructure.IsChecked ?? true
+		};
+		return searchOptions;
 	}
 }
