@@ -1,8 +1,5 @@
 namespace MoveAndTagMediaFilesWpfApp;
 
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
 public partial class MainWindow : Window
 {
 	public MainWindow()
@@ -22,7 +19,7 @@ public partial class MainWindow : Window
 
 	private void btnFindFiles_Click(object sender, RoutedEventArgs e)
 	{
-		var searchOptions = SearchOptions.FromApplicationSettings(ApplicationSettings.Instance);
+		var searchOptions = ApplicationSettings.Instance.ToSearchOptions();
 
 
 	}
