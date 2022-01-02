@@ -1,9 +1,10 @@
-namespace MoveAndTagMediaFilesWpfApp;
+namespace MoveAndTagMediaFiles;
 
 public record SearchOptions
 {
 	public string SourceDirectory { get; init; } = string.Empty;
 	public string DestinationDirectory { get; init; } = string.Empty;
-	public List<string> IncludedFilePatterns { get; init; } = new List<string>();
+	public string FileSearchPattern { get; init; } = String.Empty;
+	public bool SearchSubdirectories { get; init; } = true;
 	public bool PreserveDirectoryStructure { get; init; } = true;
 }

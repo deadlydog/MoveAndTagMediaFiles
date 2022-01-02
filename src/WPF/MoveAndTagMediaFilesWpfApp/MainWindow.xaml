@@ -6,7 +6,9 @@
 		xmlns:local="clr-namespace:MoveAndTagMediaFilesWpfApp"
 		mc:Ignorable="d"
 		Title="Move and Tag Media Files"
-		Height="450" Width="800">
+		Height="450" Width="800"
+		Loaded="Window_Loaded"
+		Closed="Window_Closed">
 	<Grid Margin="5">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -56,24 +58,33 @@
 						<ColumnDefinition Width="*" />
 						<ColumnDefinition Width="5" />
 						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="5" />
+						<ColumnDefinition Width="Auto" />
 					</Grid.ColumnDefinitions>
 
 					<DockPanel Grid.Column="0">
-						<TextBlock Text="Included File Patterns:" Margin="0,0,5,0" ToolTip="A comma-separated list of the file patterns to match." />
-						<TextBox x:Name="txtIncludedFilePatterns" HorizontalAlignment="Stretch" Text="{local:ApplicationSettingsBinding Path=IncludedFilePatterns, UpdateSourceTrigger=PropertyChanged}" ToolTip="A comma-separated list of the file patterns to match." />
+						<TextBlock Text="File Search Pattern:" Margin="0,0,5,0" ToolTip="The filename pattern to match. Supports wildcards (*). e.g. 2021*.jpg" />
+						<TextBox x:Name="txtFileSearchPattern" HorizontalAlignment="Stretch" Text="{local:ApplicationSettingsBinding Path=FileSearchPattern, UpdateSourceTrigger=PropertyChanged}" ToolTip="A comma-separated list of the file patterns to match." />
 					</DockPanel>
 
-					<CheckBox Grid.Column="2" x:Name="chkPreserveDirectoryStructure" Content="Preserve Directory Structure" IsChecked="{local:ApplicationSettingsBinding Path=PreserveDirectoryStructure}" VerticalAlignment="Center" ToolTip="If checked, files copied/moved from the Source Directory to the Destination Directory will be placed in the same relative subdirectory path, rather than directly in the root Destination Directory." />
+					<CheckBox Grid.Column="2" x:Name="chkSearchSubdirectories" Content="Search subdirectories" IsChecked="{local:ApplicationSettingsBinding Path=SearchSubdirectories}" VerticalAlignment="Center" ToolTip="If checked, it will search for files in subdirectories of the Source Directory." />
+
+					<CheckBox Grid.Column="4" x:Name="chkPreserveDirectoryStructure" Content="Preserve Directory Structure" IsChecked="{local:ApplicationSettingsBinding Path=PreserveDirectoryStructure}" VerticalAlignment="Center" IsEnabled="{Binding ElementName=chkSearchSubdirectories, Path=IsChecked}" ToolTip="If checked, files copied/moved from the Source Directory to the Destination Directory will be placed in the same relative subdirectory path, rather than directly in the root Destination Directory." />
 				</Grid>
 			</Grid>
 		</GroupBox>
 
 		<DockPanel Grid.Row="2">
-			<Button x:Name="btnFindFiles" Content="Find Files" Click="btnFindFiles_Click" />
+			<Button x:Name="btnFindFiles" Content="Find Files" Height="40" Click="btnFindFiles_Click" />
 		</DockPanel>
 
-		<GroupBox Grid.Row="4" Header="Media Preview">
-			<Image x:Name="imgCurrentImage" />
-		</GroupBox>
+		<DockPanel Grid.Row="4">
+			<TextBlock DockPanel.Dock="Top" Text="Changes performed:" />
+			<TextBox IsEnabled="False" />
+		</DockPanel>
+
+		<DockPanel Grid.Row="6">
+			<TextBlock x:Name="txtStatus" />
+		</DockPanel>
 	</Grid>
 </Window>

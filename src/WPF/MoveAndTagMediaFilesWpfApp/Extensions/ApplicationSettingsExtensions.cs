@@ -1,3 +1,4 @@
+using MoveAndTagMediaFiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,8 @@ namespace MoveAndTagMediaFilesWpfApp
 			{
 				SourceDirectory = appSettings.SourceDirectory,
 				DestinationDirectory = appSettings.DestinationDirectory,
-				IncludedFilePatterns = appSettings.IncludedFilePatterns.Split(",").ToList(),
+				FileSearchPattern = appSettings.FileSearchPattern,
+				SearchSubdirectories = appSettings.SearchSubdirectories,
 				PreserveDirectoryStructure = appSettings.PreserveDirectoryStructure,
 			};
 			return searchOptions;

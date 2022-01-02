@@ -13,7 +13,7 @@ public partial class App : Application
 	{
 		// Catch exceptions from all threads in the AppDomain.
 		AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
-			ShowUnhandledException(args.ExceptionObject as Exception, "AppDomain.CurrentDomain.UnhandledException", false);
+			ShowUnhandledException(args.ExceptionObject as Exception ?? new Exception("Unknown exception"), "AppDomain.CurrentDomain.UnhandledException", false);
 
 		// Catch exceptions from each AppDomain that uses a task scheduler for async operations.
 		TaskScheduler.UnobservedTaskException += (sender, args) =>
