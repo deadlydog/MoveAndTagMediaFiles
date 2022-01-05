@@ -57,6 +57,14 @@ public partial class MainWindow : Window
 		{
 			filePaths = FileRetriever.GetFilePaths(fileSearchSettings);
 		}
+		catch (System.IO.IOException ex)
+			when (ex.Message.Contains("The user name or password is incorrect", StringComparison.OrdinalIgnoreCase))
+		{
+			var pathThatCouldNotBeAccessed = ex.Message.Split(":").Last();
+			var formattedPathTheCouldNotBeAccessed = pathThatCouldNotBeAccessed.Trim().Trim('\'');
+
+			MessageBox.Show($"Appropriate credentials are required to access the Source Directory or one of its subdirectories. Please provide a username and password with permissions to access the path '{formattedPathTheCouldNotBeAccessed}'.", "Provide credentials");
+		}
 		catch (Exception ex)
 		{
 			MessageBox.Show(ex.ToString(), "An error occurred retrieving file paths");
@@ -80,8 +88,8 @@ public partial class MainWindow : Window
 	{
 		var searchSettings = new FileSearchSettings()
 		{
-			SourceDirectory = txtSourceDirectory.Text,
-			FileSearchPattern = txtFileSearchPattern.Text,
+			SourceDirectory = txtSourceDirectory.Text.Trim(),
+			FileSearchPattern = txtFileSearchPattern.Text.Trim(),
 			SearchSubdirectories = chkSearchSubdirectories.IsChecked ?? true
 		};
 		return searchSettings;
@@ -91,8 +99,8 @@ public partial class MainWindow : Window
 	{
 		var previewSettings = new PreviewSettings()
 		{
-			SourceDirectory = txtSourceDirectory.Text,
-			DestinationDirectory = txtDestinationDirectory.Text,
+			SourceDirectory = txtSourceDirectory.Text.Trim(),
+			DestinationDirectory = txtDestinationDirectory.Text.Trim(),
 			PreserveDirectoryStructure = chkPreserveDirectoryStructure.IsChecked ?? true
 		};
 		return previewSettings;
