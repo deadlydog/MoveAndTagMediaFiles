@@ -64,7 +64,7 @@ public partial class MainWindow : Window
 
 		if (filePaths.Any())
 		{
-			var previewWindow = new MediaPreviewWindow(filePaths.ToList(), previewSettings);
+			var previewWindow = new PreviewWindow(filePaths.ToList(), previewSettings);
 			previewWindow.Show();
 		}
 		else

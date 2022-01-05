@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace MoveAndTagMediaFilesWpfApp
 {
-	public partial class MediaPreviewWindow : Window, INotifyPropertyChanged
+	public partial class PreviewWindow : Window, INotifyPropertyChanged
 	{
 		#region Notify Property Changed
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -19,7 +19,7 @@ namespace MoveAndTagMediaFilesWpfApp
 		private int _totalNumberOfMediaFiles = 0;
 		private int _currentMediaFileIndex = 0;
 
-		public MediaPreviewWindow(List<string> mediaFilePaths, PreviewSettings previewSettings)
+		public PreviewWindow(List<string> mediaFilePaths, PreviewSettings previewSettings)
 		{
 			_mediaFilePaths = mediaFilePaths;
 			_previewSettings = previewSettings;
