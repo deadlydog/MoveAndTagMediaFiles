@@ -25,7 +25,7 @@ public partial class MainWindow : Window
 			ShowNewFolderButton = false
 		};
 
-		// If the user selected a folder, put it in the Root Directory text box.
+		// If the user selected a folder, put it in the Source Directory text box.
 		if (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			txtSourceDirectory.Text = folderDialog.SelectedPath;
 	}
@@ -38,9 +38,9 @@ public partial class MainWindow : Window
 			ShowNewFolderButton = false
 		};
 
-		// If the user selected a folder, put it in the Root Directory text box.
+		// If the user selected a folder, put it in the Destination Directory text box.
 		if (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-			txtSourceDirectory.Text = folderDialog.SelectedPath;
+			txtDestinationDirectory.Text = folderDialog.SelectedPath;
 	}
 
 	private void btnFindFiles_Click(object sender, RoutedEventArgs e)
@@ -48,18 +48,30 @@ public partial class MainWindow : Window
 		btnFindFiles.IsEnabled = false;
 		txtStatus.Text = "Searching for files...";
 
-		// Get settings from the UI before doing any potentially long-running operations where the user might change the UI values.
+		// Get all settings from the UI before doing any potentially long-running operations where the user might change the UI values.
 		var fileSearchSettings = GetFileSearchSettingsFromUi();
 		var previewSettings = GetPreviewSettingsFromUi();
 
+		var filePaths = Enumerable.Empty<string>();
 		try
 		{
-			var filePaths = FileRetriever.GetFilePaths(fileSearchSettings);
+			filePaths = FileRetriever.GetFilePaths(fileSearchSettings);
 		}
 		catch (Exception ex)
 		{
 			MessageBox.Show(ex.ToString(), "An error occurred retrieving file paths");
 		}
+
+		if (filePaths.Any())
+		{
+			var previewWindow = new MediaPreviewWindow(filePaths.ToList(), previewSettings);
+			previewWindow.Show();
+		}
+		else
+		{
+			MessageBox.Show("No files were found that matched the search criteria.", "No files found");
+		}
+
 		btnFindFiles.IsEnabled = true;
 		txtStatus.Text = string.Empty;
 	}

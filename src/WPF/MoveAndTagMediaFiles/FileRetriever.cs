@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace MoveAndTagMediaFiles;
 
 public class FileRetriever
@@ -15,7 +9,14 @@ public class FileRetriever
 			RecurseSubdirectories = searchOptions.SearchSubdirectories
 		};
 
-		var files = Directory.EnumerateFiles(searchOptions.SourceDirectory, searchOptions.FileSearchPattern, directorySearchOptions);
+		// Leaving the File Search Pattern blank won't find any files; it has to use a wildcard to match against everything.
+		var fileSearchPattern = searchOptions.FileSearchPattern;
+		if (string.IsNullOrWhiteSpace(fileSearchPattern))
+		{
+			fileSearchPattern = "*";
+		}
+
+		var files = Directory.EnumerateFiles(searchOptions.SourceDirectory, fileSearchPattern, directorySearchOptions);
 		return files;
 	}
 }

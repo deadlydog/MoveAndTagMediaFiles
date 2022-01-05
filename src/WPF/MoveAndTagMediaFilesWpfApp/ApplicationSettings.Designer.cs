@@ -26,60 +26,60 @@ namespace MoveAndTagMediaFilesWpfApp {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public double WindowWidth {
+        public double MainWindow_Width {
             get {
-                return ((double)(this["WindowWidth"]));
+                return ((double)(this["MainWindow_Width"]));
             }
             set {
-                this["WindowWidth"] = value;
+                this["MainWindow_Width"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("400")]
-        public double WindowHeight {
+        public double MainWindow_Height {
             get {
-                return ((double)(this["WindowHeight"]));
+                return ((double)(this["MainWindow_Height"]));
             }
             set {
-                this["WindowHeight"] = value;
+                this["MainWindow_Height"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double WindowLeftPosition {
+        public double MainWindow_LeftPosition {
             get {
-                return ((double)(this["WindowLeftPosition"]));
+                return ((double)(this["MainWindow_LeftPosition"]));
             }
             set {
-                this["WindowLeftPosition"] = value;
+                this["MainWindow_LeftPosition"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double WindowTopPosition {
+        public double MainWindow_TopPosition {
             get {
-                return ((double)(this["WindowTopPosition"]));
+                return ((double)(this["MainWindow_TopPosition"]));
             }
             set {
-                this["WindowTopPosition"] = value;
+                this["MainWindow_TopPosition"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
-        public string WindowState {
+        public string MainWindow_WindowState {
             get {
-                return ((string)(this["WindowState"]));
+                return ((string)(this["MainWindow_WindowState"]));
             }
             set {
-                this["WindowState"] = value;
+                this["MainWindow_WindowState"] = value;
             }
         }
         

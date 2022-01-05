@@ -2,19 +2,19 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MoveAndTagMediaFilesWpfApp" GeneratedClassName="ApplicationSettings">
   <Profiles />
   <Settings>
-    <Setting Name="WindowWidth" Type="System.Double" Scope="User">
+    <Setting Name="MainWindow_Width" Type="System.Double" Scope="User">
       <Value Profile="(Default)">600</Value>
     </Setting>
-    <Setting Name="WindowHeight" Type="System.Double" Scope="User">
+    <Setting Name="MainWindow_Height" Type="System.Double" Scope="User">
       <Value Profile="(Default)">400</Value>
     </Setting>
-    <Setting Name="WindowLeftPosition" Type="System.Double" Scope="User">
+    <Setting Name="MainWindow_LeftPosition" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="WindowTopPosition" Type="System.Double" Scope="User">
+    <Setting Name="MainWindow_TopPosition" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="WindowState" Type="System.String" Scope="User">
+    <Setting Name="MainWindow_WindowState" Type="System.String" Scope="User">
       <Value Profile="(Default)">Normal</Value>
     </Setting>
     <Setting Name="FileSearchSettings_SourceDirectory" Type="System.String" Scope="User">
