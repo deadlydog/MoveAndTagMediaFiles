@@ -7,7 +7,13 @@
 		mc:Ignorable="d"
 		Title="Media Preview"
 		MinWidth="800"
-		MinHeight="450">
+		MinHeight="450"
+		Width="{local:ApplicationSettingsBinding Path=PreviewWindow_Width}"
+		Height="{local:ApplicationSettingsBinding Path=PreviewWindow_Height}"
+		Left="{local:ApplicationSettingsBinding Path=PreviewWindow_LeftPosition}"
+		Top="{local:ApplicationSettingsBinding Path=PreviewWindow_TopPosition}"
+		WindowState="{local:ApplicationSettingsBinding Path=PreviewWindow_WindowState}"
+		FocusManager.FocusedElement="{Binding ElementName=btnNextMediaFile}">
 	<Grid Margin="5">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />

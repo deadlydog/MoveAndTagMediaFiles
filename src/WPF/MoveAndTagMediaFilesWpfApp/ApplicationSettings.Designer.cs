@@ -142,5 +142,65 @@ namespace MoveAndTagMediaFilesWpfApp {
                 this["FileSearchSettings_PreserveDirectoryStructure"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("800")]
+        public double PreviewWindow_Width {
+            get {
+                return ((double)(this["PreviewWindow_Width"]));
+            }
+            set {
+                this["PreviewWindow_Width"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public double PreviewWindow_Height {
+            get {
+                return ((double)(this["PreviewWindow_Height"]));
+            }
+            set {
+                this["PreviewWindow_Height"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double PreviewWindow_LeftPosition {
+            get {
+                return ((double)(this["PreviewWindow_LeftPosition"]));
+            }
+            set {
+                this["PreviewWindow_LeftPosition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double PreviewWindow_TopPosition {
+            get {
+                return ((double)(this["PreviewWindow_TopPosition"]));
+            }
+            set {
+                this["PreviewWindow_TopPosition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public string PreviewWindow_WindowState {
+            get {
+                return ((string)(this["PreviewWindow_WindowState"]));
+            }
+            set {
+                this["PreviewWindow_WindowState"] = value;
+            }
+        }
     }
 }
