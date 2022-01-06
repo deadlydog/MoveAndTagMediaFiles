@@ -57,13 +57,13 @@ public partial class MainWindow : Window
 		{
 			filePaths = FileRetriever.GetFilePaths(fileSearchSettings);
 		}
-		catch (System.IO.IOException ex)
-			when (ex.Message.Contains("The user name or password is incorrect", StringComparison.OrdinalIgnoreCase))
+		catch (CredentialsRequiredToAccessPathException ex)
 		{
-			var pathThatCouldNotBeAccessed = ex.Message.Split(":").Last();
-			var formattedPathTheCouldNotBeAccessed = pathThatCouldNotBeAccessed.Trim().Trim('\'');
-
-			MessageBox.Show($"Appropriate credentials are required to access the Source Directory or one of its subdirectories. Please provide a username and password with permissions to access the path '{formattedPathTheCouldNotBeAccessed}'.", "Provide credentials");
+			MessageBox.Show($"Appropriate credentials are required to access the Source Directory or one of its subdirectories. Please provide a username and password with permissions to access the path '{ex.PathThatCouldNotBeAccessed}'.", "Provide credentials");
+		}
+		catch (InvalidCredentialsException ex)
+		{
+			MessageBox.Show($"Validation of username '{ex.Username}' with domain '{ex.Domain}' and password was not successful. The returned error code was {ex.ErrorCode}.");
 		}
 		catch (Exception ex)
 		{
@@ -90,7 +90,10 @@ public partial class MainWindow : Window
 		{
 			SourceDirectory = txtSourceDirectory.Text.Trim(),
 			FileSearchPattern = txtFileSearchPattern.Text.Trim(),
-			SearchSubdirectories = chkSearchSubdirectories.IsChecked ?? true
+			SearchSubdirectories = chkSearchSubdirectories.IsChecked ?? true,
+			UseCredentials = chkUseCredentialsForSourceDirectory.IsChecked ?? false,
+			CredentialsUsername = txtSourceDirectoryUsername.Text.Trim(),
+			CredentialsPassword = txtSourceDirectoryPassword.SecurePassword,
 		};
 		return searchSettings;
 	}
@@ -101,7 +104,7 @@ public partial class MainWindow : Window
 		{
 			SourceDirectory = txtSourceDirectory.Text.Trim(),
 			DestinationDirectory = txtDestinationDirectory.Text.Trim(),
-			PreserveDirectoryStructure = chkPreserveDirectoryStructure.IsChecked ?? true
+			PreserveDirectoryStructure = chkPreserveDirectoryStructure.IsChecked ?? true,
 		};
 		return previewSettings;
 	}
