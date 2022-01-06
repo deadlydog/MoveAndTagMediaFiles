@@ -7,7 +7,7 @@ namespace MoveAndTagMediaFilesWpfApp
 	public partial class PreviewWindow : Window, INotifyPropertyChanged
 	{
 		#region Notify Property Changed
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 		protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
