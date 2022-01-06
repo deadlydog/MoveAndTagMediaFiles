@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoveAndTagMediaFilesWpfApp", "MoveAndTagMediaFilesWpfApp\MoveAndTagMediaFilesWpfApp.csproj", "{F399CB11-A5B6-49D0-AEEA-E130B92A5673}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoveAndTagMediaFiles", "MoveAndTagMediaFiles\MoveAndTagMediaFiles.csproj", "{A2ACD11F-70AB-44D9-88BE-9CEB39874CF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoveAndTagMediaFiles", "MoveAndTagMediaFiles\MoveAndTagMediaFiles.csproj", "{A2ACD11F-70AB-44D9-88BE-9CEB39874CF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoveAndTagMediaFiles.Tests", "MoveAndTagMediaFiles.Tests\MoveAndTagMediaFiles.Tests.csproj", "{E6BDE802-834B-4190-8FA1-2E0E08618A7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A2ACD11F-70AB-44D9-88BE-9CEB39874CF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2ACD11F-70AB-44D9-88BE-9CEB39874CF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2ACD11F-70AB-44D9-88BE-9CEB39874CF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6BDE802-834B-4190-8FA1-2E0E08618A7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6BDE802-834B-4190-8FA1-2E0E08618A7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6BDE802-834B-4190-8FA1-2E0E08618A7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6BDE802-834B-4190-8FA1-2E0E08618A7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
