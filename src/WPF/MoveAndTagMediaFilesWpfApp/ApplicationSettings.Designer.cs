@@ -25,7 +25,7 @@ namespace MoveAndTagMediaFilesWpfApp {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        [global::System.Configuration.DefaultSettingValueAttribute("700")]
         public double MainWindow_Width {
             get {
                 return ((double)(this["MainWindow_Width"]));
@@ -200,6 +200,54 @@ namespace MoveAndTagMediaFilesWpfApp {
             }
             set {
                 this["PreviewWindow_WindowState"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseSourceDirectoryCredentials {
+            get {
+                return ((bool)(this["UseSourceDirectoryCredentials"]));
+            }
+            set {
+                this["UseSourceDirectoryCredentials"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseDestinationDirectoryCredentials {
+            get {
+                return ((bool)(this["UseDestinationDirectoryCredentials"]));
+            }
+            set {
+                this["UseDestinationDirectoryCredentials"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SourceDirectoryCredentialsUsername {
+            get {
+                return ((string)(this["SourceDirectoryCredentialsUsername"]));
+            }
+            set {
+                this["SourceDirectoryCredentialsUsername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DestinationDirectoryCredentialsUsername {
+            get {
+                return ((string)(this["DestinationDirectoryCredentialsUsername"]));
+            }
+            set {
+                this["DestinationDirectoryCredentialsUsername"] = value;
             }
         }
     }

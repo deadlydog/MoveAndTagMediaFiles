@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="MainWindow_Width" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">600</Value>
+      <Value Profile="(Default)">700</Value>
     </Setting>
     <Setting Name="MainWindow_Height" Type="System.Double" Scope="User">
       <Value Profile="(Default)">400</Value>
@@ -46,6 +46,18 @@
     </Setting>
     <Setting Name="PreviewWindow_WindowState" Type="System.String" Scope="User">
       <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="UseSourceDirectoryCredentials" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UseDestinationDirectoryCredentials" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SourceDirectoryCredentialsUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DestinationDirectoryCredentialsUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
