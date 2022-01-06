@@ -43,7 +43,7 @@ public partial class MainWindow : Window
 			txtDestinationDirectory.Text = folderDialog.SelectedPath;
 	}
 
-	private void btnFindFiles_Click(object sender, RoutedEventArgs e)
+	private async void btnFindFiles_Click(object sender, RoutedEventArgs e)
 	{
 		btnFindFiles.IsEnabled = false;
 		txtStatus.Text = "Searching for files...";
@@ -51,11 +51,11 @@ public partial class MainWindow : Window
 		// Get all settings from the UI before doing any potentially long-running operations where the user might change the UI values.
 		var fileSearchSettings = GetFileSearchSettingsFromUi();
 		var previewSettings = GetPreviewSettingsFromUi();
-
+		
 		var filePaths = Enumerable.Empty<string>();
 		try
 		{
-			filePaths = FileRetriever.GetFilePaths(fileSearchSettings);
+			filePaths = await Task.Run(() => FileRetriever.GetFilePaths(fileSearchSettings));
 		}
 		catch (CredentialsRequiredToAccessPathException ex)
 		{
@@ -63,7 +63,7 @@ public partial class MainWindow : Window
 		}
 		catch (InvalidCredentialsException ex)
 		{
-			MessageBox.Show($"Validation of username '{ex.Username}' with domain '{ex.Domain}' and password was not successful. The returned error code was {ex.ErrorCode}.");
+			MessageBox.Show($"Validation of credentials for username '{ex.Username}' with domain '{ex.Domain}' was not successful. The returned error code was {ex.ErrorCode}. Please ensure your username and password are correct.", "Invalid credentials");
 		}
 		catch (Exception ex)
 		{
