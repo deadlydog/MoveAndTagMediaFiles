@@ -1,6 +1,8 @@
 using FluentAssertions;
 using System;
 using System.IO;
+using System.Net;
+using System.Security;
 using Xunit;
 
 namespace MoveAndTagMediaFiles.Tests
@@ -59,6 +61,30 @@ namespace MoveAndTagMediaFiles.Tests
 
 			// Assert.
 			action.Should().Throw<DirectoryNotFoundException>();
+		}
+
+		
+		[Fact (Skip = "This is an integration test that requires a UNC path that requires credentials, which is hard to mock. So just unskip this test and run it manually when needed.")]
+		public void GettingFilePathsForADirectoryThatExistsOnANetworkShareThatRequiresCredentialsShouldSucceed()
+		{
+			var uncPathPassword = "YOUR PASSWORD GOES HERE. DON'T COMMIT IT TO SOURCE CONTROL!!!";
+
+			// Arrange.
+			var fileSearchSettings = new FileSearchSettings()
+			{
+				SourceDirectory = @"\\DiskStation\photo\By Date\2010",
+				SearchSubdirectories = false,
+				FileSearchPattern = string.Empty,
+				UseCredentials = true,
+				CredentialsUsername = @"DiskStation\Dan",
+				CredentialsPassword = new NetworkCredential(string.Empty, uncPathPassword).SecurePassword,
+			};
+
+			// Act.
+			var filePaths = FileRetriever.GetFilePaths(fileSearchSettings);
+
+			// Assert.
+			filePaths.Count().Should().BeGreaterThan(10);
 		}
 	}
 }

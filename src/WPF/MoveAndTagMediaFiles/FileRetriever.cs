@@ -19,8 +19,10 @@ public class FileRetriever
 		var files = Enumerable.Empty<string>();
 		if (searchOptions.UseCredentials)
 		{
-			files = Impersonation.InvokeMethodAsUser(searchOptions.CredentialsUsername, searchOptions.CredentialsPassword,
-				() => EnumerateFilePaths(searchOptions.SourceDirectory, fileSearchPattern, directorySearchOptions));
+			var password = new System.Net.NetworkCredential("", searchOptions.CredentialsPassword).Password;
+			PInvokeWindowsNetworking.connectToRemote(searchOptions.SourceDirectory, searchOptions.CredentialsUsername, password);
+			files = EnumerateFilePaths(searchOptions.SourceDirectory, fileSearchPattern, directorySearchOptions);
+			PInvokeWindowsNetworking.disconnectRemote(searchOptions.SourceDirectory);
 		}
 		else
 		{
@@ -41,7 +43,7 @@ public class FileRetriever
 			var pathThatCouldNotBeAccessed = ex.Message.Split(":").Last();
 			var formattedPathTheCouldNotBeAccessed = pathThatCouldNotBeAccessed.Trim().Trim('\'');
 
-			throw new CredentialsRequiredToAccessPathException(formattedPathTheCouldNotBeAccessed);
+			throw new InvalidCredentialsToAccessPathException(formattedPathTheCouldNotBeAccessed);
 		}
 	}
 }

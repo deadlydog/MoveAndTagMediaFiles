@@ -57,13 +57,9 @@ public partial class MainWindow : Window
 		{
 			filePaths = await Task.Run(() => FileRetriever.GetFilePaths(fileSearchSettings));
 		}
-		catch (CredentialsRequiredToAccessPathException ex)
+		catch (InvalidCredentialsToAccessPathException ex)
 		{
-			MessageBox.Show($"Appropriate credentials are required to access the Source Directory or one of its subdirectories. Please provide a username and password with permissions to access the path '{ex.PathThatCouldNotBeAccessed}'.", "Provide credentials");
-		}
-		catch (InvalidCredentialsException ex)
-		{
-			MessageBox.Show($"Validation of credentials for username '{ex.Username}' with domain '{ex.Domain}' was not successful. The returned error code was {ex.ErrorCode}. Please ensure your username and password are correct.", "Invalid credentials");
+			MessageBox.Show($"Appropriate credentials are required to access the Source Directory or one of its subdirectories. Please provide a username and password with permissions to access the path '{ex.PathThatCouldNotBeAccessed}'.", "Provide appropriate credentials");
 		}
 		catch (Exception ex)
 		{

@@ -1,10 +1,10 @@
 namespace MoveAndTagMediaFiles;
 
-public class CredentialsRequiredToAccessPathException : Exception
+public class InvalidCredentialsToAccessPathException : Exception
 {
 	public string PathThatCouldNotBeAccessed { get; init; } = string.Empty;
 
-	public CredentialsRequiredToAccessPathException(string pathThatCouldNotBeAccessed)
+	public InvalidCredentialsToAccessPathException(string pathThatCouldNotBeAccessed)
 	{
 		PathThatCouldNotBeAccessed = pathThatCouldNotBeAccessed;
 	}
