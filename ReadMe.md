@@ -4,9 +4,9 @@
 
 ## 💬 Description
 
-This application allows you to preview large numbers of media files (images, videos, audio) and easily copy or move specific ones to another directory, as well as optionally add tags to them.
+This application allows you to more easily preview large numbers of media files (images, videos, audio) and copy or move specific ones to another directory, as well as optionally add tags to them.
 
-## ❓ Why this exists
+## ❓ Why this app exists
 
 My dog died and I wanted to gather all of the photos I had of her to put them on a digital photo frame, dedicated solely for pictures of her.
 This meant combing through tens of thousands of photos from the past decade and separating out the ones she was in, which was a very time consuming process.
