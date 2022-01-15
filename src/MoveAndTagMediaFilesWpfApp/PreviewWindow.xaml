@@ -33,7 +33,7 @@
 
 			<Button Grid.Column="0" x:Name="btnPreviousMediaFile" Content="&lt; Previous" Padding="5,0,5,0" Click="btnPreviousMediaFile_Click" />
 			<TextBlock Grid.Column="1" Text="{Binding Path=MediaFilesListLocationDisplay}" d:Text="20 of 100" HorizontalAlignment="Stretch" TextAlignment="Center" />
-			<CheckBox Grid.Column="2" x:Name="chkAutomaticallyMoveToNextMediaFile" Content="Move Automatically" Margin="0,0,5,0" ToolTip="Automatically move to the next media file after copying/moving/updating a file" />
+			<CheckBox Grid.Column="2" x:Name="chkAutomaticallyProgressToNextMediaFile" Content="Progress Automatically" Margin="0,0,5,0" ToolTip="Automatically move to the next media file after copying/moving/updating a file" />
 			<Button Grid.Column="3" x:Name="btnNextMediaFile" Content="Next &gt;" Padding="5,0,5,0" Click="btnNextMediaFile_Click" />
 		</Grid>
 

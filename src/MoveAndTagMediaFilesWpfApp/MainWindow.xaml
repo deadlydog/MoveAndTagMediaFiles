@@ -62,7 +62,7 @@
 					<TextBlock Grid.Row="0" Grid.Column="0" Text="Source directory:" ToolTip="The directory to look for files and/or directories in." />
 					<TextBox Grid.Row="0" Grid.Column="2" x:Name="txtSourceDirectory" Text="{local:ApplicationSettingsBinding Path=FileSearchSettings_SourceDirectory, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" ToolTip="The directory to look for files and/or directories in." />
 					<Button Grid.Row="0" Grid.Column="3" Content="..." x:Name="btnBrowseForSourceDirectory" Click="btnBrowseForSourceDirectory_Click" ToolTip="Browse for a directory to look for media files in." />
-					<CheckBox Grid.Row="0" Grid.Column="5" x:Name="chkUseCredentialsForSourceDirectory" IsChecked="{local:ApplicationSettingsBinding Path=UseSourceDirectoryCredentials}" VerticalAlignment="Center" ToolTip="Check to use credentials to connect to the Source Directory." />
+					<CheckBox Grid.Row="0" Grid.Column="5" x:Name="chkUseCredentialsForSourceDirectory" IsChecked="{local:ApplicationSettingsBinding Path=UseSourceDirectoryCredentials}" ToolTip="Check to use credentials to connect to the Source Directory." />
 					<TextBlock Grid.Row="0" Grid.Column="7" Text="Username:" ToolTip="The username to use when reading/writing files in the Source Directory." />
 					<TextBox Grid.Row="0" Grid.Column="9" x:Name="txtSourceDirectoryUsername" Text="{local:ApplicationSettingsBinding Path=SourceDirectoryCredentialsUsername, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" IsEnabled="{Binding ElementName=chkUseCredentialsForSourceDirectory, Path=IsChecked}" ToolTip="The username to use when reading/writing files in the Source Directory." />
 					<TextBlock Grid.Row="0" Grid.Column="11" Text="Password:" ToolTip="The password to use when reading/writing files in the Source Directory." />
@@ -71,7 +71,7 @@
 					<TextBlock Grid.Row="2" Grid.Column="0" Text="Destination directory:" ToolTip="The directory copy or move files to." />
 					<TextBox Grid.Row="2" Grid.Column="2" x:Name="txtDestinationDirectory" Text="{local:ApplicationSettingsBinding Path=FileSearchSettings_DestinationDirectory, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" ToolTip="The directory to copy or move files to." />
 					<Button Grid.Row="2" Grid.Column="3" Content="..." x:Name="btnBrowseForDestinationDirectory" Click="btnBrowseForDestinationDirectory_Click" ToolTip="Browse for a directory to copy or move the files to." />
-					<CheckBox Grid.Row="2" Grid.Column="5" x:Name="chkUseCredentialsForDestinationDirectory" IsChecked="{local:ApplicationSettingsBinding Path=UseDestinationDirectoryCredentials}" VerticalAlignment="Center" ToolTip="Check to use credentials to connect to the Destination Directory." />
+					<CheckBox Grid.Row="2" Grid.Column="5" x:Name="chkUseCredentialsForDestinationDirectory" IsChecked="{local:ApplicationSettingsBinding Path=UseDestinationDirectoryCredentials}" ToolTip="Check to use credentials to connect to the Destination Directory." />
 					<TextBlock Grid.Row="2" Grid.Column="7" Text="Username:" ToolTip="The username to use when reading/writing files in the Destination Directory." />
 					<TextBox Grid.Row="2" Grid.Column="9" x:Name="txtDestinationDirectoryUsername" Text="{local:ApplicationSettingsBinding Path=DestinationDirectoryCredentialsUsername, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" IsEnabled="{Binding ElementName=chkUseCredentialsForDestinationDirectory, Path=IsChecked}" ToolTip="The username to use when reading/writing files in the Destination Directory." />
 					<TextBlock Grid.Row="2" Grid.Column="11" Text="Password:" ToolTip="The password to use when reading/writing files in the Destination Directory." />
@@ -92,9 +92,9 @@
 						<TextBox x:Name="txtFileSearchPattern" HorizontalAlignment="Stretch" Text="{local:ApplicationSettingsBinding Path=FileSearchSettings_FileSearchPattern, UpdateSourceTrigger=PropertyChanged}" ToolTip="The filename pattern to match. Supports wildcards (*). e.g. 2021*.jpg. Leave blank to match all files." />
 					</DockPanel>
 
-					<CheckBox Grid.Column="2" x:Name="chkSearchSubdirectories" Content="Search subdirectories" IsChecked="{local:ApplicationSettingsBinding Path=FileSearchSettings_SearchSubdirectories}" VerticalAlignment="Center" ToolTip="If checked, it will search for files in subdirectories of the Source Directory." />
+					<CheckBox Grid.Column="2" x:Name="chkSearchSubdirectories" Content="Search subdirectories" IsChecked="{local:ApplicationSettingsBinding Path=FileSearchSettings_SearchSubdirectories}" ToolTip="If checked, it will search for files in subdirectories of the Source Directory." />
 
-					<CheckBox Grid.Column="4" x:Name="chkPreserveDirectoryStructure" Content="Preserve directory structure" IsChecked="{local:ApplicationSettingsBinding Path=FileSearchSettings_PreserveDirectoryStructure}" IsEnabled="{Binding ElementName=chkSearchSubdirectories, Path=IsChecked}" VerticalAlignment="Center" ToolTip="If checked, files copied/moved from the Source Directory to the Destination Directory will be placed in the same relative subdirectory path, rather than directly in the root Destination Directory." />
+					<CheckBox Grid.Column="4" x:Name="chkPreserveDirectoryStructure" Content="Preserve directory structure" IsChecked="{local:ApplicationSettingsBinding Path=FileSearchSettings_PreserveDirectoryStructure}" IsEnabled="{Binding ElementName=chkSearchSubdirectories, Path=IsChecked}" ToolTip="If checked, files copied/moved from the Source Directory to the Destination Directory will be placed in the same relative subdirectory path, rather than directly in the root Destination Directory." />
 				</Grid>
 			</Grid>
 		</GroupBox>
