@@ -28,20 +28,45 @@
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 
-			<Button Grid.Column="0" x:Name="btnPreviousMediaFile" Content="Previous" Padding="5,0,5,0" Click="btnPreviousMediaFile_Click" />
+			<Button Grid.Column="0" x:Name="btnPreviousMediaFile" Content="&lt; Previous" Padding="5,0,5,0" Click="btnPreviousMediaFile_Click" />
 			<TextBlock Grid.Column="1" Text="{Binding Path=MediaFilesListLocationDisplay}" d:Text="20 of 100" HorizontalAlignment="Stretch" TextAlignment="Center" />
-			<Button Grid.Column="2" x:Name="btnNextMediaFile" Content="Next" HorizontalAlignment="Right" Padding="5,0,5,0" Click="btnNextMediaFile_Click" />
+			<CheckBox Grid.Column="2" x:Name="chkAutomaticallyMoveToNextMediaFile" Content="Move Automatically" Margin="0,0,5,0" ToolTip="Automatically move to the next media file after copying/moving/updating a file" />
+			<Button Grid.Column="3" x:Name="btnNextMediaFile" Content="Next &gt;" Padding="5,0,5,0" Click="btnNextMediaFile_Click" />
 		</Grid>
 
-		<DockPanel Grid.Row="2">
+		<Grid Grid.Row="2">
 			<Image x:Name="imgCurrentImage" Source="{Binding Path=CurrentMediaFilePair.SourceMediaFile.FilePath}" />
-		</DockPanel>
+		</Grid>
 
-		<StackPanel Grid.Row="4" Orientation="Horizontal" >
-			<CheckBox Content="Exists in Source" IsEnabled="False" IsChecked="{Binding Path=CurrentMediaFilePair.SourceMediaFile.FileExists}" Margin="0,0,10,0" />
-			<CheckBox Content="Exists in Destination" IsEnabled="False" IsChecked="{Binding Path=CurrentMediaFilePair.DestinationMediaFile.FileExists}" />
-		</StackPanel>
+		<Grid Grid.Row="4">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<ListBox Grid.Column="0" x:Name="lstSourceMediaTags" IsEnabled="{Binding Path=CurrentMediaFilePair.SourceMediaFile.FileExists}">
+				<d:ListBox.Items>
+					<ListBoxItem Content="Molly" />
+					<ListBoxItem Content="Huey" />
+					<ListBoxItem Content="Other" />
+				</d:ListBox.Items>
+			</ListBox>
+			<ListBox Grid.Column="1" x:Name="lstAllMediaTags" IsEnabled="True" />
+			<Button Grid.Column="2" Content="Copy" />
+			<Button Grid.Column="3" Content="Move" />
+			<ListBox Grid.Column="4" x:Name="lstDestinationMediaTags" IsEnabled="{Binding Path=CurrentMediaFilePair.DestinationMediaFile.FileExists}">
+				<d:ListBox.Items>
+					<ListBoxItem Content="Molly" />
+					<ListBoxItem Content="Huey" />
+					<ListBoxItem Content="Other" />
+				</d:ListBox.Items>
+			</ListBox>
+		</Grid>
 	</Grid>
 </Window>
