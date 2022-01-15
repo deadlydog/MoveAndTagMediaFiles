@@ -11,7 +11,7 @@ public class MediaFileTypeResolver
 	public static MediaTypes GetMediaTypeFromFileExtension(string extension) =>
 		extension.ToLower() switch
 		{
-			"ai" or "andd" or "bmp" or "eps" or "gif" or "heic" or "heif" or "jpg" or "jpeg" or
+			"ai" or "bmp" or "eps" or "gif" or "heic" or "heif" or "indd" or "jpg" or "jpeg" or
 			"pdf" or "png" or "psd" or "svg" or "svgz" or "raw" or "tif" or "tiff" or "webp" => MediaTypes.Image,
 
 			"avi" or "avchd" or "flv" or "f4v" or "mkv" or "mov" or "m4p" or "m4v" or "mp4" or
