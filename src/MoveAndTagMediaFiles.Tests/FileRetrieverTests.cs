@@ -14,7 +14,7 @@ namespace MoveAndTagMediaFiles.Tests
 		private FilePaths GetValidImageFilePaths()
 		{
 			var imagesDirectoryPath = TestHelpers.GetPathInTestProject("TestAssets/Images");
-			return new FilePaths(imagesDirectoryPath, 3);
+			return new FilePaths(imagesDirectoryPath, 6);
 		}
 
 		private FilePaths GetInvalidImageFilePaths()
