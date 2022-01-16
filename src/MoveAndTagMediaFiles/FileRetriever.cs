@@ -37,7 +37,7 @@ public class FileRetriever
 		{
 			return Directory.EnumerateFiles(sourceDirectory, fileSearchPattern, directorySearchOptions);
 		}
-		catch (System.IO.IOException ex)
+		catch (IOException ex)
 			when (ex.Message.Contains("The user name or password is incorrect", StringComparison.OrdinalIgnoreCase))
 		{
 			var pathThatCouldNotBeAccessed = ex.Message.Split(":").Last();
