@@ -8,6 +8,8 @@ public record MediaFile
 
 	public bool FileExists { get; init; }
 
+	public IReadOnlySet<string> Tags { get; init; } = new HashSet<string>();
+
 	public static MediaFile Empty => _empty;
 	private static MediaFile _empty = new MediaFile();
 }

@@ -14,13 +14,20 @@ public class MediaFileFactory
 			// Eat any exceptions thrown and assume the file doesn't exist.
 		}
 
+		var tags = new HashSet<string>();
+		if (fileExists)
+		{
+			tags = FileTagger.GetTags(filePath).ToHashSet();
+		}
+
 		var mediaType = MediaFileTypeResolver.GetMediaTypeFromFilePath(filePath);
 
 		var mediaFile = new MediaFile()
 		{
 			FilePath = filePath,
 			FileExists = fileExists,
-			MediaFileType = mediaType
+			MediaFileType = mediaType,
+			Tags = tags,
 		};
 
 		return mediaFile;
