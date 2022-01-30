@@ -48,4 +48,34 @@ public class FileTaggerTests
 
 		action.Should().Throw<IOException>();
 	}
+
+	[Fact]
+	public void SettingTagsOnAValidFileWithNotTagsShouldSetTheTagsCorrectly()
+	{
+
+	}
+
+	[Fact]
+	public void SettingTagsOnAValidFileWithExistingTagsShouldOverwriteTheExistingTags()
+	{
+
+	}
+
+	[Fact]
+	public void AddingTagsToAValidFileWithNoTagsShouldAddTheTagsCorrectly()
+	{
+
+	}
+
+	[Fact]
+	public void AddingTagsToAValidFileWithExistingTagsShouldAddTheTagsCorrectly()
+	{
+
+	}
+
+	[Fact]
+	public void AddingTagsToAValidFileShouldOnlyAddTagsOfDifferentCase()
+	{
+
+	}
 }

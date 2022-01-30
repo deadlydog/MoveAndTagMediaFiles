@@ -17,7 +17,7 @@ public class MediaFileFactory
 		var tags = new HashSet<string>();
 		if (fileExists)
 		{
-			tags = FileTagger.GetTags(filePath).ToHashSet();
+			tags = FileTagger.GetTags(filePath).ToHashSet(StringComparer.OrdinalIgnoreCase);
 		}
 
 		var mediaType = MediaFileTypeResolver.GetMediaTypeFromFilePath(filePath);
