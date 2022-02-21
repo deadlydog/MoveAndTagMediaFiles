@@ -13,6 +13,7 @@
 		Left="{local:ApplicationSettingsBinding Path=MainWindow_LeftPosition}"
 		Top="{local:ApplicationSettingsBinding Path=MainWindow_TopPosition}"
 		WindowState="{local:ApplicationSettingsBinding Path=MainWindow_WindowState}"
+		Closing="Window_Closing"
 		FocusManager.FocusedElement="{Binding ElementName=txtSourceDirectory}">
 	<Grid Margin="5">
 		<Grid.RowDefinitions>

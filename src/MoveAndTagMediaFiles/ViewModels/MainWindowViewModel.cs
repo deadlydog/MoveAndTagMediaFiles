@@ -36,14 +36,4 @@ public class MainWindowViewModel : INotifyPropertyChanged
 		}
 	}
 	private string _destinationDirectory = string.Empty;
-
-	public void SaveApplicationSettings()
-	{
-
-	}
-
-	public void LoadApplicationSettings()
-	{
-
-	}
 }

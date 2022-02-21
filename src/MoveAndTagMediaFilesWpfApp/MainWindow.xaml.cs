@@ -10,6 +10,8 @@ public partial class MainWindow : Window
 	{
 		InitializeComponent();
 		this.DataContext = this;
+
+		LoadViewModelSettings();
 	}
 
 	private void btnBrowseForSourceDirectory_Click(object sender, RoutedEventArgs e)
@@ -98,5 +100,24 @@ public partial class MainWindow : Window
 			PreserveDirectoryStructure = chkPreserveDirectoryStructure.IsChecked ?? true,
 		};
 		return previewSettings;
+	}
+
+	private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+	{
+		SaveViewModelSettings();
+	}
+
+	private void SaveViewModelSettings()
+	{
+		var settings = ApplicationSettings.Default;
+		settings.FileSearchSettings_SourceDirectory = ViewModel.SourceDirectory;
+		settings.FileSearchSettings_DestinationDirectory = ViewModel.DestinationDirectory;
+	}
+
+	private void LoadViewModelSettings()
+	{
+		var settings = ApplicationSettings.Default;
+		ViewModel.SourceDirectory = settings.FileSearchSettings_SourceDirectory;
+		ViewModel.DestinationDirectory = settings.FileSearchSettings_DestinationDirectory;
 	}
 }
