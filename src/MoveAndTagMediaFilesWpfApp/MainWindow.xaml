@@ -5,7 +5,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:MoveAndTagMediaFilesWpfApp"
 		mc:Ignorable="d"
-		Title="Move and Tag Media Files"
+		Title="{Binding Path=ViewModel.WindowTitle, Mode=OneWay}"
 		MinWidth="600"
 		MinHeight="400"
 		Width="{local:ApplicationSettingsBinding Path=MainWindow_Width}"

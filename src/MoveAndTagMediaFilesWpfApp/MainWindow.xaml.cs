@@ -4,17 +4,12 @@ namespace MoveAndTagMediaFilesWpfApp;
 
 public partial class MainWindow : Window
 {
+	public MainWindowViewModel ViewModel { get; } = new MainWindowViewModel();
+
 	public MainWindow()
 	{
 		InitializeComponent();
 		this.DataContext = this;
-
-		SetWindowTitle();
-	}
-
-	private void SetWindowTitle()
-	{
-		this.Title += " v" + System.Reflection.Assembly.GetEntryAssembly()?.GetName().Version?.ToString(3);
 	}
 
 	private void btnBrowseForSourceDirectory_Click(object sender, RoutedEventArgs e)
