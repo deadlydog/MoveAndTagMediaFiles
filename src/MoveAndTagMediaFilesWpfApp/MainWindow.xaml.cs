@@ -1,4 +1,5 @@
 using MoveAndTagMediaFiles;
+using System.Windows.Controls;
 
 namespace MoveAndTagMediaFilesWpfApp;
 
@@ -38,6 +39,16 @@ public partial class MainWindow : Window
 		// If the user selected a folder, put it in the Destination Directory text box.
 		if (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			txtDestinationDirectory.Text = folderDialog.SelectedPath;
+	}
+
+	private void txtSourceDirectoryPassword_PasswordChanged(object sender, RoutedEventArgs e)
+	{
+		ViewModel.SourceDirectoryCredentialsPassword = ((PasswordBox)sender).SecurePassword;
+	}
+
+	private void txtDestinationDirectoryPassword_PasswordChanged(object sender, RoutedEventArgs e)
+	{
+		ViewModel.DestinationDirectoryCredentialsPassword = ((PasswordBox)sender).SecurePassword;
 	}
 
 	private async void btnFindFiles_Click(object sender, RoutedEventArgs e)
@@ -81,12 +92,12 @@ public partial class MainWindow : Window
 	{
 		var searchSettings = new FileSearchSettings()
 		{
-			SourceDirectory = txtSourceDirectory.Text.Trim(),
-			FileSearchPattern = txtFileSearchPattern.Text.Trim(),
-			SearchSubdirectories = chkSearchSubdirectories.IsChecked ?? true,
-			UseCredentials = chkUseCredentialsForSourceDirectory.IsChecked ?? false,
-			CredentialsUsername = txtSourceDirectoryUsername.Text.Trim(),
-			CredentialsPassword = txtSourceDirectoryPassword.SecurePassword,
+			SourceDirectory = ViewModel.SourceDirectory.Trim(),
+			FileSearchPattern = ViewModel.FileSearchPattern.Trim(),
+			SearchSubdirectories = ViewModel.SearchSubdirectories,
+			UseCredentials = ViewModel.UseSourceDirectoryCredentials,
+			CredentialsUsername = ViewModel.SourceDirectoryCredentialsUsername.Trim(),
+			CredentialsPassword = ViewModel.SourceDirectoryCredentialsPassword,
 		};
 		return searchSettings;
 	}
@@ -95,9 +106,9 @@ public partial class MainWindow : Window
 	{
 		var previewSettings = new PreviewSettings()
 		{
-			SourceDirectory = txtSourceDirectory.Text.Trim(),
-			DestinationDirectory = txtDestinationDirectory.Text.Trim(),
-			PreserveDirectoryStructure = chkPreserveDirectoryStructure.IsChecked ?? true,
+			SourceDirectory = ViewModel.SourceDirectory.Trim(),
+			DestinationDirectory = ViewModel.DestinationDirectory.Trim(),
+			PreserveDirectoryStructure = ViewModel.PreserveDirectoryStructure,
 		};
 		return previewSettings;
 	}
@@ -112,6 +123,13 @@ public partial class MainWindow : Window
 		var settings = ApplicationSettings.Default;
 		settings.FileSearchSettings_SourceDirectory = ViewModel.SourceDirectory;
 		settings.FileSearchSettings_DestinationDirectory = ViewModel.DestinationDirectory;
+		settings.FileSearchSettings_FileSearchPattern = ViewModel.FileSearchPattern;
+		settings.FileSearchSettings_SearchSubdirectories = ViewModel.SearchSubdirectories;
+		settings.FileSearchSettings_PreserveDirectoryStructure = ViewModel.PreserveDirectoryStructure;
+		settings.UseSourceDirectoryCredentials = ViewModel.UseSourceDirectoryCredentials;
+		settings.SourceDirectoryCredentialsUsername = ViewModel.SourceDirectoryCredentialsUsername;
+		settings.UseDestinationDirectoryCredentials = ViewModel.UseDestinationDirectoryCredentials;
+		settings.DestinationDirectoryCredentialsUsername = ViewModel.DestinationDirectoryCredentialsUsername;
 	}
 
 	private void LoadViewModelSettings()
@@ -119,5 +137,12 @@ public partial class MainWindow : Window
 		var settings = ApplicationSettings.Default;
 		ViewModel.SourceDirectory = settings.FileSearchSettings_SourceDirectory;
 		ViewModel.DestinationDirectory = settings.FileSearchSettings_DestinationDirectory;
+		ViewModel.FileSearchPattern = settings.FileSearchSettings_FileSearchPattern;
+		ViewModel.SearchSubdirectories = settings.FileSearchSettings_SearchSubdirectories;
+		ViewModel.PreserveDirectoryStructure = settings.FileSearchSettings_PreserveDirectoryStructure;
+		ViewModel.UseSourceDirectoryCredentials = settings.UseSourceDirectoryCredentials;
+		ViewModel.SourceDirectoryCredentialsUsername = settings.SourceDirectoryCredentialsUsername;
+		ViewModel.UseDestinationDirectoryCredentials = settings.UseDestinationDirectoryCredentials;
+		ViewModel.DestinationDirectoryCredentialsUsername = settings.DestinationDirectoryCredentialsUsername;
 	}
 }
