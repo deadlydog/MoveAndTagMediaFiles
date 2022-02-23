@@ -1,4 +1,6 @@
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using System.ComponentModel.DataAnnotations;
 using System.Security;
 
@@ -86,4 +88,52 @@ public class MainWindowViewModel : ObservableValidator
 		set => SetProperty(ref _destinationDirectoryCredentialsPassword, value);
 	}
 	private SecureString _destinationDirectoryCredentialsPassword = new SecureString();
+
+	public string Status
+	{
+		get => _status;
+		set => SetProperty(ref _status, value);
+	}
+	private string _status = string.Empty;
+
+	public MainWindowViewModel()
+	{
+		GetFilesAndLaunchPreviewWindowCommand = new AsyncRelayCommand(GetFilePathsAndLaunchPreviewWindowAsync);
+	}
+
+	public IAsyncRelayCommand GetFilesAndLaunchPreviewWindowCommand { get; }
+
+	public async Task GetFilePathsAndLaunchPreviewWindowAsync()
+	{
+		Status = "Searching for files...";
+		var fileSearchSettings = ConstructFileSearchSettings();
+
+		var filePaths = Enumerable.Empty<string>();
+		try
+		{
+			filePaths = await Task.Run(() => FileRetriever.GetFilePaths(fileSearchSettings));
+		}
+		catch (InvalidCredentialsToAccessPathException ex)
+		{
+			var message = $"Appropriate credentials are required to access the Source Directory or one of its subdirectories. Please provide a username and password with permissions to access the path '{ex.PathThatCouldNotBeAccessed}'.";
+			var title = "Provide appropriate credentials";
+			throw new UserMessageException(title, message, ex);
+		}
+
+		WeakReferenceMessenger.Default.Send(new LaunchPreviewWindowMessage(filePaths));
+	}
+
+	private FileSearchSettings ConstructFileSearchSettings()
+	{
+		var searchSettings = new FileSearchSettings()
+		{
+			SourceDirectory = SourceDirectory.Trim(),
+			FileSearchPattern = FileSearchPattern.Trim(),
+			SearchSubdirectories = SearchSubdirectories,
+			UseCredentials = UseSourceDirectoryCredentials,
+			CredentialsUsername = SourceDirectoryCredentialsUsername.Trim(),
+			CredentialsPassword = SourceDirectoryCredentialsPassword,
+		};
+		return searchSettings;
+	}
 }

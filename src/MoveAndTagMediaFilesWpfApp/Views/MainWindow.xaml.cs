@@ -57,17 +57,16 @@ public partial class MainWindow : Window
 		txtStatus.Text = "Searching for files...";
 
 		// Get all settings from the UI before doing any potentially long-running operations where the user might change the UI values.
-		var fileSearchSettings = GetFileSearchSettingsFromUi();
 		var previewSettings = GetPreviewSettingsFromUi();
 		
 		var filePaths = Enumerable.Empty<string>();
 		try
 		{
-			filePaths = await Task.Run(() => FileRetriever.GetFilePaths(fileSearchSettings));
+			filePaths = await ViewModel.GetFilePaths();
 		}
-		catch (InvalidCredentialsToAccessPathException ex)
+		catch (UserMessageException ex)
 		{
-			MessageBox.Show($"Appropriate credentials are required to access the Source Directory or one of its subdirectories. Please provide a username and password with permissions to access the path '{ex.PathThatCouldNotBeAccessed}'.", "Provide appropriate credentials");
+			MessageBox.Show(ex.UserMessage, ex.UserMessageTitle);
 		}
 		catch (Exception ex)
 		{
@@ -86,20 +85,6 @@ public partial class MainWindow : Window
 
 		btnFindFiles.IsEnabled = true;
 		txtStatus.Text = string.Empty;
-	}
-
-	private FileSearchSettings GetFileSearchSettingsFromUi()
-	{
-		var searchSettings = new FileSearchSettings()
-		{
-			SourceDirectory = ViewModel.SourceDirectory.Trim(),
-			FileSearchPattern = ViewModel.FileSearchPattern.Trim(),
-			SearchSubdirectories = ViewModel.SearchSubdirectories,
-			UseCredentials = ViewModel.UseSourceDirectoryCredentials,
-			CredentialsUsername = ViewModel.SourceDirectoryCredentialsUsername.Trim(),
-			CredentialsPassword = ViewModel.SourceDirectoryCredentialsPassword,
-		};
-		return searchSettings;
 	}
 
 	private PreviewSettings GetPreviewSettingsFromUi()

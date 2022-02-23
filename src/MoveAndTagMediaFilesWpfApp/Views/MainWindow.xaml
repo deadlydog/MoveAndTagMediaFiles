@@ -110,7 +110,7 @@
 		</DockPanel>
 
 		<DockPanel Grid.Row="6">
-			<TextBlock x:Name="txtStatus" />
+			<TextBlock x:Name="txtStatus" Text="{Binding Path=ViewModel.Status, UpdateSourceTrigger=PropertyChanged}" />
 		</DockPanel>
 	</Grid>
 </Window>

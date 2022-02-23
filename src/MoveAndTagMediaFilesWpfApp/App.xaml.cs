@@ -7,6 +7,26 @@ public partial class App : Application
 	public App() : base()
 	{
 		SetupUnhandledExceptionHandling();
+
+		ConfigureServices();
+
+	}
+
+	public new static App Current => (App)Application.Current;
+
+	public IServiceProvider Services { get; }
+
+	private static IServiceProvider ConfigureServices()
+	{
+		var services = new ServiceCollection();
+
+		services.AddSingleton<IFilesService, FilesService>();
+		services.AddSingleton<ISettingsService, SettingsService>();
+		services.AddSingleton<IClipboardService, ClipboardService>();
+		services.AddSingleton<IShareService, ShareService>();
+		services.AddSingleton<IEmailService, EmailService>();
+
+		return services.BuildServiceProvider();
 	}
 
 	private void SetupUnhandledExceptionHandling()
