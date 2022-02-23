@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics;
 
 namespace MoveAndTagMediaFilesWpfApp;
@@ -7,9 +8,7 @@ public partial class App : Application
 	public App() : base()
 	{
 		SetupUnhandledExceptionHandling();
-
 		ConfigureServices();
-
 	}
 
 	public new static App Current => (App)Application.Current;
