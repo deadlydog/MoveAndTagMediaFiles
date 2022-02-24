@@ -101,7 +101,7 @@
 		</GroupBox>
 
 		<DockPanel Grid.Row="2">
-			<Button Content="Preview Files" Command="{Binding Path=ViewModel.GetFilesAndLaunchPreviewWindowCommand}" IsEnabled="{Binding Path=ViewModel.GetFilesAndLaunchPreviewWindowCommand.IsRunning}" Height="40" />
+			<Button Content="Preview Files" Command="{Binding Path=ViewModel.GetFilesAndLaunchPreviewWindowCommand}" IsEnabled="{Binding Path=ViewModel.GetFilesAndLaunchPreviewWindowCommand.IsRunning, Converter={StaticResource InverseBooleanConverter}}" Height="40" />
 		</DockPanel>
 
 		<DockPanel Grid.Row="4">
