@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using MoveAndTagMediaFiles;
+using MoveAndTagMediaFiles.Services;
 using MoveAndTagMediaFilesWpfApp.Infrastructure;
 using MoveAndTagMediaFilesWpfApp.Services;
 
@@ -16,17 +17,20 @@ public static class CompositionRoot
 		services.AddTransient<MainWindowViewModel>();
 		services.AddTransient<MainWindow>();
 
-		return new NoNullsServiceProvider(services.BuildServiceProvider());
+		services.AddSingleton<IDialogService, DialogService>();
+		services.AddTransient<ICommonServices, CommonServices>();
+
+		return new ThrowIfNullServiceProvider(services.BuildServiceProvider());
 	}
 }
 
-public class NoNullsServiceProvider : IServiceProvider
+public class ThrowIfNullServiceProvider : IServiceProvider
 {
 	private ServiceProvider _serviceProvider;
-	public NoNullsServiceProvider(ServiceProvider serviceProvider)
+	public ThrowIfNullServiceProvider(ServiceProvider serviceProvider)
 	{
 		_serviceProvider = serviceProvider;
 	}
 
-	public object? GetService(Type serviceType) => _serviceProvider.GetService(serviceType) ?? throw new NotImplementedException($"IoC container could not resolve type '{serviceType.FullName}'.");
+	public object? GetService(Type serviceType) => _serviceProvider.GetService(serviceType) ?? throw new InvalidOperationException($"IoC container could not resolve type '{serviceType.FullName}'.");
 }

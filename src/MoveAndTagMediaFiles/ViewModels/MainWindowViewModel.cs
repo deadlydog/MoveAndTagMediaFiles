@@ -1,14 +1,12 @@
-using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
-using Microsoft.Toolkit.Mvvm.Messaging;
-using MoveAndTagMediaFiles.Messages;
+using MoveAndTagMediaFiles.Services;
 using MoveAndTagMediaFiles.ViewModels;
 using System.ComponentModel.DataAnnotations;
 using System.Security;
 
 namespace MoveAndTagMediaFiles;
 
-public class MainWindowViewModel : ObservableValidator
+public class MainWindowViewModel : ViewModelBase
 {
 	public string WindowTitle { get => "Move and Tag Media Files v" + System.Reflection.Assembly.GetEntryAssembly()?.GetName().Version?.ToString(3); }
 
@@ -98,7 +96,7 @@ public class MainWindowViewModel : ObservableValidator
 	}
 	private string _status = string.Empty;
 
-	public MainWindowViewModel()
+	public MainWindowViewModel(ICommonServices commonServices) : base(commonServices)
 	{
 		
 	}
@@ -119,20 +117,20 @@ public class MainWindowViewModel : ObservableValidator
 		{
 			var message = $"Appropriate credentials are required to access the Source Directory or one of its subdirectories. Please provide a username and password with permissions to access the path '{ex.PathThatCouldNotBeAccessed}'.";
 			var title = "Provide appropriate credentials";
-			WeakReferenceMessenger.Default.Send(new UserWarningMessage(title, message));
+			DialogService.ShowWarningMessage(title, message);
 		}
 		catch (Exception ex)
 		{
 			var message = $"An error occurred retrieving file paths from '{fileSearchSettings.SourceDirectory}'.";
 			var title = "Error occurred retrieving files";
-			WeakReferenceMessenger.Default.Send(new UserErrorMessage(title, message, ex));
+			DialogService.ShowErrorMessage(title, message, ex);
 		}
 
 		if (!filePaths.Any())
 		{
 			var message = "No files were found that matched the search criteria.";
 			var title = "No files found";
-			WeakReferenceMessenger.Default.Send(new UserInformationMessage(title, message));
+			DialogService.ShowInformationMessage(title, message);
 			return;
 		}
 
