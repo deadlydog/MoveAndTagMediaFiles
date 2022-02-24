@@ -1,31 +1,53 @@
 using Microsoft.Extensions.DependencyInjection;
+using MoveAndTagMediaFilesWpfApp.Services;
 using System.Diagnostics;
+using System.IO;
 
 namespace MoveAndTagMediaFilesWpfApp;
 
 public partial class App : Application
 {
+	public new static App Current => (App)Application.Current;
+	public IServiceProvider Services { get; }
+
 	public App() : base()
 	{
 		SetupUnhandledExceptionHandling();
-		ConfigureServices();
+		Services = CompositionRoot.ConfigureServices();
 	}
 
-	public new static App Current => (App)Application.Current;
-
-	public IServiceProvider Services { get; }
-
-	private static IServiceProvider ConfigureServices()
+	protected override async void OnStartup(StartupEventArgs e)
 	{
-		var services = new ServiceCollection();
+		base.OnStartup(e);
 
-		services.AddSingleton<IFilesService, FilesService>();
-		services.AddSingleton<ISettingsService, SettingsService>();
-		services.AddSingleton<IClipboardService, ClipboardService>();
-		services.AddSingleton<IShareService, ShareService>();
-		services.AddSingleton<IEmailService, EmailService>();
+		await LoadAppSettings();
+		var mainWindow = Services.GetService<MainWindow>();
+		mainWindow.Show();
+	}
 
-		return services.BuildServiceProvider();
+	private async void Application_Exit(object sender, ExitEventArgs e)
+	{
+		await SaveAppSettings();
+	}
+
+	public string ApplicationSettingsDirectoryPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), System.Reflection.Assembly.GetEntryAssembly()?.GetName()?.Name ?? "MoveAndTagMediaFiles");
+	public string ApplicationSettingsFilePath => Path.Combine(ApplicationSettingsDirectoryPath, "ApplicationSettings.json");
+
+	private async Task SaveAppSettings()
+	{
+		var settingsPersistor = App.Current.Services.GetService<IPersistData>();
+		await settingsPersistor.SaveObjectAsync(ApplicationSettingsFilePath, ApplicationSettings.Current);
+	}
+
+	private async Task LoadAppSettings()
+	{
+		if (!Directory.Exists(ApplicationSettingsDirectoryPath))
+		{
+			Directory.CreateDirectory(ApplicationSettingsDirectoryPath);
+		}
+
+		var settingsPersistor = App.Current.Services.GetService<IPersistData>();
+		ApplicationSettings.Current = await settingsPersistor.GetObjectAsync<ApplicationSettings>(ApplicationSettingsFilePath, new ApplicationSettings());
 	}
 
 	private void SetupUnhandledExceptionHandling()
@@ -41,8 +63,8 @@ public partial class App : Application
 		// Catch exceptions from a single specific UI dispatcher thread.
 		Dispatcher.UnhandledException += (sender, args) =>
 		{
-				// If we are debugging, let Visual Studio handle the exception and take us to the code that threw it.
-				if (!Debugger.IsAttached)
+			// If we are debugging, let Visual Studio handle the exception and take us to the code that threw it.
+			if (!Debugger.IsAttached)
 			{
 				args.Handled = true;
 				ShowUnhandledException(args.Exception, "Dispatcher.UnhandledException", true);
@@ -80,11 +102,5 @@ public partial class App : Application
 		{
 			Application.Current.Shutdown();
 		}
-	}
-
-	private void Application_Exit(object sender, ExitEventArgs e)
-	{
-		// Save any application settings that were changed when exiting (such as window size and position).
-		ApplicationSettings.Default.Save();
 	}
 }

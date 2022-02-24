@@ -17,7 +17,7 @@ public class ApplicationSettingsBindingExtension : Binding
 
 	private void Initialize()
 	{
-		this.Source = ApplicationSettings.Default;
+		this.Source = ApplicationSettings.Current;
 		this.Mode = BindingMode.TwoWay;
 	}
 }

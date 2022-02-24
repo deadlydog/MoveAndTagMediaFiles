@@ -1,6 +1,8 @@
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Toolkit.Mvvm.Messaging;
+using MoveAndTagMediaFiles.Messages;
+using MoveAndTagMediaFiles.ViewModels;
 using System.ComponentModel.DataAnnotations;
 using System.Security;
 
@@ -98,10 +100,10 @@ public class MainWindowViewModel : ObservableValidator
 
 	public MainWindowViewModel()
 	{
-		GetFilesAndLaunchPreviewWindowCommand = new AsyncRelayCommand(GetFilePathsAndLaunchPreviewWindowAsync);
+		
 	}
 
-	public IAsyncRelayCommand GetFilesAndLaunchPreviewWindowCommand { get; }
+	public IAsyncRelayCommand GetFilesAndLaunchPreviewWindowCommand => new AsyncRelayCommand(GetFilePathsAndLaunchPreviewWindowAsync);
 
 	public async Task GetFilePathsAndLaunchPreviewWindowAsync()
 	{
@@ -117,10 +119,31 @@ public class MainWindowViewModel : ObservableValidator
 		{
 			var message = $"Appropriate credentials are required to access the Source Directory or one of its subdirectories. Please provide a username and password with permissions to access the path '{ex.PathThatCouldNotBeAccessed}'.";
 			var title = "Provide appropriate credentials";
-			throw new UserMessageException(title, message, ex);
+			WeakReferenceMessenger.Default.Send(new UserWarningMessage(title, message));
+		}
+		catch (Exception ex)
+		{
+			var message = $"An error occurred retrieving file paths from '{fileSearchSettings.SourceDirectory}'.";
+			var title = "Error occurred retrieving files";
+			WeakReferenceMessenger.Default.Send(new UserErrorMessage(title, message, ex));
 		}
 
-		WeakReferenceMessenger.Default.Send(new LaunchPreviewWindowMessage(filePaths));
+		if (!filePaths.Any())
+		{
+			var message = "No files were found that matched the search criteria.";
+			var title = "No files found";
+			WeakReferenceMessenger.Default.Send(new UserInformationMessage(title, message));
+			return;
+		}
+
+		var previewSettings = ConstructPreviewSettings();
+		var previewWindowArgs = new PreviewWindowViewModelArguments
+		{
+			MediaFilePaths = filePaths.ToList(),
+			PreviewSettings = previewSettings
+		};
+
+		Status = string.Empty;
 	}
 
 	private FileSearchSettings ConstructFileSearchSettings()
@@ -135,5 +158,16 @@ public class MainWindowViewModel : ObservableValidator
 			CredentialsPassword = SourceDirectoryCredentialsPassword,
 		};
 		return searchSettings;
+	}
+
+	private PreviewSettings ConstructPreviewSettings()
+	{
+		var previewSettings = new PreviewSettings
+		{
+			SourceDirectory = SourceDirectory.Trim(),
+			DestinationDirectory = DestinationDirectory.Trim(),
+			PreserveDirectoryStructure = PreserveDirectoryStructure
+		};
+		return previewSettings;
 	}
 }
