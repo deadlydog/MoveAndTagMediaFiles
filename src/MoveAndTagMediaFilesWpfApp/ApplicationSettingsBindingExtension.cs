@@ -2,7 +2,7 @@ using System.Windows.Data;
 
 namespace MoveAndTagMediaFilesWpfApp;
 
-// Binding extension that allows XAML to easily access application settings stored in the Properties\Settings.settings file.
+// Binding extension that allows XAML to easily access application settings.
 public class ApplicationSettingsBindingExtension : Binding
 {
 	public ApplicationSettingsBindingExtension()

@@ -20,26 +20,26 @@ public partial class App : Application
 	{
 		base.OnStartup(e);
 
-		await LoadAppSettings();
+		await LoadApplicationSettings();
 		var mainWindow = Services.GetService<MainWindow>();
 		mainWindow.Show();
 	}
 
 	private async void Application_Exit(object sender, ExitEventArgs e)
 	{
-		await SaveAppSettings();
+		await SaveApplicationSettings();
 	}
 
 	public string ApplicationSettingsDirectoryPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), System.Reflection.Assembly.GetEntryAssembly()?.GetName()?.Name ?? "MoveAndTagMediaFiles");
 	public string ApplicationSettingsFilePath => Path.Combine(ApplicationSettingsDirectoryPath, "ApplicationSettings.json");
 
-	private async Task SaveAppSettings()
+	private async Task SaveApplicationSettings()
 	{
 		var settingsPersistor = App.Current.Services.GetService<IPersistData>();
 		await settingsPersistor.SaveObjectAsync(ApplicationSettingsFilePath, ApplicationSettings.Current);
 	}
 
-	private async Task LoadAppSettings()
+	private async Task LoadApplicationSettings()
 	{
 		if (!Directory.Exists(ApplicationSettingsDirectoryPath))
 		{
