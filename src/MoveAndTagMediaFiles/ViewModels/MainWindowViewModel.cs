@@ -102,10 +102,30 @@ public class MainWindowViewModel : ViewModelBase
 	}
 
 	public IAsyncRelayCommand GetFilesAndLaunchPreviewWindowCommand => new AsyncRelayCommand(GetFilePathsAndLaunchPreviewWindowAsync);
+	public bool GetFilesAndLaunchPreviewWindowCommandIsRunning
+	{
+		get => _getFilesAndLaunchPreviewWindowCommandIsRunning;
+		set => SetProperty(ref _getFilesAndLaunchPreviewWindowCommandIsRunning, value);
+	}
+	private bool _getFilesAndLaunchPreviewWindowCommandIsRunning = false;
 
 	public async Task GetFilePathsAndLaunchPreviewWindowAsync()
 	{
-		Status = "Searching for files...";
+		try
+		{
+			GetFilesAndLaunchPreviewWindowCommandIsRunning = true;
+			Status = "Searching for files...";
+			await RunGetFilePathsAndLaunchPreviewWindowAsync();
+		}
+		finally
+		{
+			GetFilesAndLaunchPreviewWindowCommandIsRunning = false;
+			Status = string.Empty;
+		}
+	}
+
+	private async Task RunGetFilePathsAndLaunchPreviewWindowAsync()
+	{ 
 		var fileSearchSettings = ConstructFileSearchSettings();
 
 		var filePaths = Enumerable.Empty<string>();
@@ -141,7 +161,7 @@ public class MainWindowViewModel : ViewModelBase
 			PreviewSettings = previewSettings
 		};
 
-		Status = string.Empty;
+		await Task.Run(() => Thread.Sleep(10000));
 	}
 
 	private FileSearchSettings ConstructFileSearchSettings()
