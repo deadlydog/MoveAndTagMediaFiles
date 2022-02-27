@@ -16,8 +16,8 @@ public record ApplicationSettings
 
 	public double MainWindow_Width { get; set; } = 700;
 	public double MainWindow_Height { get; set; } = 400;
-	public double MainWindow_LeftPositiion { get; set; } = 0;
-	public double MainWindow_TopPositiion { get; set; } = 0;
+	public double MainWindow_LeftPosition { get; set; } = 0;
+	public double MainWindow_TopPosition { get; set; } = 0;
 	public string MainWindow_WindowState { get; set; } = "Normal";
 
 	public double PreviewWindow_Width { get; set; } = 800;
