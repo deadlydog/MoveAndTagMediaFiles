@@ -1,4 +1,4 @@
-using MoveAndTagMediaFilesWpfApp.Services;
+using MoveAndTagMediaFiles.Infrastructure.Services;
 using System.IO;
 using System.Text.Json;
 

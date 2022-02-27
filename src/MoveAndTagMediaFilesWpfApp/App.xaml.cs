@@ -1,5 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
-using MoveAndTagMediaFilesWpfApp.Services;
+using MoveAndTagMediaFiles.Infrastructure.Services;
 using System.Diagnostics;
 using System.IO;
 

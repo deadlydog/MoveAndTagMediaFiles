@@ -1,4 +1,4 @@
-namespace MoveAndTagMediaFilesWpfApp.Services
+namespace MoveAndTagMediaFiles.Infrastructure.Services
 {
 	public interface IPersistData
 	{
