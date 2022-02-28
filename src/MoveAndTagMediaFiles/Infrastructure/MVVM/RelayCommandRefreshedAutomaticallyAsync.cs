@@ -1,14 +1,15 @@
-using System.ComponentModel;
 using System.Windows.Input;
 
 namespace MoveAndTagMediaFiles.Infrastructure.MVVM;
 
+// Automatic refresh is achieved by subscribing to CommandManager.RequerySuggested.
+// This can be very expensive because the UI may constantly call CanExecute(), so use it sparingly.
+// More info: https://medium.com/@rochar/avoid-relay-commands-and-prevent-cpu-usage-peaks-in-wpf-c-ffe672de8559
+
 // Based on: https://johnthiriet.com/removing-async-void/
 
-public class CommandAsync<T> : PropertyChangedNotifier, IAsyncCommand<T>
+public class RelayCommandRefreshedAutomaticallyAsync<T> : PropertyChangedNotifier, IAsyncCommand<T>
 {
-	public event EventHandler? CanExecuteChanged;
-
 	private readonly Func<T, Task> _execute;
 	private readonly Func<T, bool> _canExecute;
 	private readonly IErrorHandler _errorHandler;
@@ -20,7 +21,7 @@ public class CommandAsync<T> : PropertyChangedNotifier, IAsyncCommand<T>
 	}
 	private bool _isExecuting;
 
-	public CommandAsync(Func<T, Task> execute, Func<T, bool> canExecute = null, IErrorHandler errorHandler = null)
+	public RelayCommandRefreshedAutomaticallyAsync(Func<T, Task> execute, Func<T, bool> canExecute = null, IErrorHandler errorHandler = null)
 	{
 		ArgumentNullException.ThrowIfNull(execute, nameof(execute));
 		_execute = execute;
@@ -47,13 +48,6 @@ public class CommandAsync<T> : PropertyChangedNotifier, IAsyncCommand<T>
 				IsExecuting = false;
 			}
 		}
-
-		RaiseCanExecuteChanged();
-	}
-
-	public void RaiseCanExecuteChanged()
-	{
-		CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 	}
 
 	bool ICommand.CanExecute(object parameter)
@@ -72,12 +66,16 @@ public class CommandAsync<T> : PropertyChangedNotifier, IAsyncCommand<T>
 			_errorHandler?.HandleError(ex);
 		}
 	}
+
+	public event EventHandler CanExecuteChanged
+	{
+		add { CommandManager.RequerySuggested += value; }
+		remove { CommandManager.RequerySuggested -= value; }
+	}
 }
 
-public class CommandAsync : PropertyChangedNotifier, IAsyncCommand
+public class RelayCommandRefreshedAutomaticallyAsync : PropertyChangedNotifier, IAsyncCommand
 {
-	public event EventHandler? CanExecuteChanged;
-
 	private readonly Func<Task> _execute;
 	private readonly Func<bool> _canExecute;
 	private readonly IErrorHandler _errorHandler;
@@ -89,7 +87,7 @@ public class CommandAsync : PropertyChangedNotifier, IAsyncCommand
 	}
 	private bool _isExecuting;
 
-	public CommandAsync(Func<Task> execute, Func<bool> canExecute = null, IErrorHandler errorHandler = null)
+	public RelayCommandRefreshedAutomaticallyAsync(Func<Task> execute, Func<bool> canExecute = null, IErrorHandler errorHandler = null)
 	{
 		ArgumentNullException.ThrowIfNull(execute, nameof(execute));
 		_execute = execute;
@@ -116,13 +114,6 @@ public class CommandAsync : PropertyChangedNotifier, IAsyncCommand
 				IsExecuting = false;
 			}
 		}
-
-		RaiseCanExecuteChanged();
-	}
-
-	public void RaiseCanExecuteChanged()
-	{
-		CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 	}
 
 	bool ICommand.CanExecute(object parameter)
@@ -140,5 +131,11 @@ public class CommandAsync : PropertyChangedNotifier, IAsyncCommand
 		{
 			_errorHandler?.HandleError(ex);
 		}
+	}
+
+	public event EventHandler CanExecuteChanged
+	{
+		add { CommandManager.RequerySuggested += value; }
+		remove { CommandManager.RequerySuggested -= value; }
 	}
 }

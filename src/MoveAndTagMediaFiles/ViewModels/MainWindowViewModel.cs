@@ -101,7 +101,7 @@ public class MainWindowViewModel : ViewModelBase
 		
 	}
 
-	public IAsyncCommand GetFilesAndLaunchPreviewWindowCommand => new RelayCommandAsync(GetFilePathsAndLaunchPreviewWindowAsync);
+	public IAsyncCommand GetFilesAndLaunchPreviewWindowCommand => new RelayCommandRefreshedAutomaticallyAsync(GetFilePathsAndLaunchPreviewWindowAsync);
 	public bool GetFilesAndLaunchPreviewWindowCommandIsRunning
 	{
 		get => _getFilesAndLaunchPreviewWindowCommandIsRunning;

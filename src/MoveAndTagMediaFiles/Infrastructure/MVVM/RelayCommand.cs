@@ -7,6 +7,8 @@ namespace MoveAndTagMediaFiles.Infrastructure.MVVM;
 
 public class RelayCommand<T> : ICommand
 {
+	public event EventHandler CanExecuteChanged;
+
 	private readonly Func<T, bool> _canExecute;
 	private readonly Action<T> _execute;
 
@@ -25,17 +27,20 @@ public class RelayCommand<T> : ICommand
 	public void Execute(object parameter)
 	{
 		_execute((T)parameter);
+
+		RaiseCanExecuteChanged();
 	}
 
-	public event EventHandler CanExecuteChanged
+	public void RaiseCanExecuteChanged()
 	{
-		add { CommandManager.RequerySuggested += value; }
-		remove { CommandManager.RequerySuggested -= value; }
+		CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 	}
 }
 
 public class RelayCommand : ICommand
 {
+	public event EventHandler CanExecuteChanged;
+
 	private readonly Func<object, bool> _canExecute;
 	private readonly Action<object> _execute;
 
@@ -54,11 +59,12 @@ public class RelayCommand : ICommand
 	public void Execute(object parameter)
 	{
 		_execute(parameter);
+
+		RaiseCanExecuteChanged();
 	}
 
-	public event EventHandler CanExecuteChanged
+	public void RaiseCanExecuteChanged()
 	{
-		add { CommandManager.RequerySuggested += value; }
-		remove { CommandManager.RequerySuggested -= value; }
+		CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 	}
 }
