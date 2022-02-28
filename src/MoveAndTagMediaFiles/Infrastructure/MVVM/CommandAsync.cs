@@ -5,8 +5,10 @@ namespace MoveAndTagMediaFiles.Infrastructure.MVVM;
 
 // Based on: https://johnthiriet.com/removing-async-void/
 
-public class RelayCommandAsync<T> : PropertyChangedNotifier, IAsyncCommand<T>
+public class CommandAsync<T> : PropertyChangedNotifier, IAsyncCommand<T>
 {
+	public event EventHandler? CanExecuteChanged;
+
 	private readonly Func<T, Task> _execute;
 	private readonly Func<T, bool> _canExecute;
 	private readonly IErrorHandler _errorHandler;
@@ -18,7 +20,7 @@ public class RelayCommandAsync<T> : PropertyChangedNotifier, IAsyncCommand<T>
 	}
 	private bool _isExecuting;
 
-	public RelayCommandAsync(Func<T, Task> execute, Func<T, bool> canExecute = null, IErrorHandler errorHandler = null)
+	public CommandAsync(Func<T, Task> execute, Func<T, bool> canExecute = null, IErrorHandler errorHandler = null)
 	{
 		ArgumentNullException.ThrowIfNull(execute, nameof(execute));
 		_execute = execute;
@@ -45,6 +47,13 @@ public class RelayCommandAsync<T> : PropertyChangedNotifier, IAsyncCommand<T>
 				IsExecuting = false;
 			}
 		}
+
+		RaiseCanExecuteChanged();
+	}
+
+	public void RaiseCanExecuteChanged()
+	{
+		CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 	}
 
 	bool ICommand.CanExecute(object parameter)
@@ -63,16 +72,12 @@ public class RelayCommandAsync<T> : PropertyChangedNotifier, IAsyncCommand<T>
 			_errorHandler?.HandleError(ex);
 		}
 	}
-
-	public event EventHandler CanExecuteChanged
-	{
-		add { CommandManager.RequerySuggested += value; }
-		remove { CommandManager.RequerySuggested -= value; }
-	}
 }
 
-public class RelayCommandAsync : PropertyChangedNotifier, IAsyncCommand
+public class CommandAsync : PropertyChangedNotifier, IAsyncCommand
 {
+	public event EventHandler? CanExecuteChanged;
+
 	private readonly Func<Task> _execute;
 	private readonly Func<bool> _canExecute;
 	private readonly IErrorHandler _errorHandler;
@@ -84,7 +89,7 @@ public class RelayCommandAsync : PropertyChangedNotifier, IAsyncCommand
 	}
 	private bool _isExecuting;
 
-	public RelayCommandAsync(Func<Task> execute, Func<bool> canExecute = null, IErrorHandler errorHandler = null)
+	public CommandAsync(Func<Task> execute, Func<bool> canExecute = null, IErrorHandler errorHandler = null)
 	{
 		ArgumentNullException.ThrowIfNull(execute, nameof(execute));
 		_execute = execute;
@@ -111,6 +116,13 @@ public class RelayCommandAsync : PropertyChangedNotifier, IAsyncCommand
 				IsExecuting = false;
 			}
 		}
+
+		RaiseCanExecuteChanged();
+	}
+
+	public void RaiseCanExecuteChanged()
+	{
+		CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 	}
 
 	bool ICommand.CanExecute(object parameter)
@@ -128,11 +140,5 @@ public class RelayCommandAsync : PropertyChangedNotifier, IAsyncCommand
 		{
 			_errorHandler?.HandleError(ex);
 		}
-	}
-
-	public event EventHandler CanExecuteChanged
-	{
-		add { CommandManager.RequerySuggested += value; }
-		remove { CommandManager.RequerySuggested -= value; }
 	}
 }
