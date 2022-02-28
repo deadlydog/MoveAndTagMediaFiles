@@ -1,9 +1,9 @@
-using Microsoft.Toolkit.Mvvm.ComponentModel;
+using MoveAndTagMediaFiles.Infrastructure.MVVM;
 using MoveAndTagMediaFiles.Services;
 
 namespace MoveAndTagMediaFiles.ViewModels;
 
-public class ViewModelBase : ObservableValidator
+public class ViewModelBase : PropertyChangedNotifier
 {
 	protected IDialogService DialogService { get; init; }
 

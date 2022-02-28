@@ -1,4 +1,4 @@
-using Microsoft.Toolkit.Mvvm.Input;
+using MoveAndTagMediaFiles.Infrastructure.MVVM;
 using MoveAndTagMediaFiles.Services;
 using MoveAndTagMediaFiles.ViewModels;
 using System.ComponentModel.DataAnnotations;
@@ -101,7 +101,7 @@ public class MainWindowViewModel : ViewModelBase
 		
 	}
 
-	public IAsyncRelayCommand GetFilesAndLaunchPreviewWindowCommand => new AsyncRelayCommand(GetFilePathsAndLaunchPreviewWindowAsync);
+	public IAsyncCommand GetFilesAndLaunchPreviewWindowCommand => new RelayCommandAsync(GetFilePathsAndLaunchPreviewWindowAsync);
 	public bool GetFilesAndLaunchPreviewWindowCommandIsRunning
 	{
 		get => _getFilesAndLaunchPreviewWindowCommandIsRunning;
