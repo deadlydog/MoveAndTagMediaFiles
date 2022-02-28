@@ -103,7 +103,7 @@
 		<DockPanel Grid.Row="2">
 			<Button Content="Preview Files"
 					Command="{Binding Path=ViewModel.GetFilesAndLaunchPreviewWindowCommand}"
-					IsEnabled="{Binding Path=ViewModel.GetFilesAndLaunchPreviewWindowCommandIsRunning, Converter={StaticResource InverseBooleanConverter}}"
+					IsEnabled="{Binding Path=ViewModel.GetFilesAndLaunchPreviewWindowCommandIsExecuting, Converter={StaticResource InverseBooleanConverter}}"
 					Height="40" />
 		</DockPanel>
 

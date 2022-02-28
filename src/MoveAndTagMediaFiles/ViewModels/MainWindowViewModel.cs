@@ -101,25 +101,25 @@ public class MainWindowViewModel : ViewModelBase
 		
 	}
 
-	public IAsyncCommand GetFilesAndLaunchPreviewWindowCommand => new RelayCommandRefreshedAutomaticallyAsync(GetFilePathsAndLaunchPreviewWindowAsync);
-	public bool GetFilesAndLaunchPreviewWindowCommandIsRunning
+	public IAsyncCommand GetFilesAndLaunchPreviewWindowCommand => new RelayCommandAsync(GetFilePathsAndLaunchPreviewWindowAsync);
+	public bool GetFilesAndLaunchPreviewWindowCommandIsExecuting
 	{
-		get => _getFilesAndLaunchPreviewWindowCommandIsRunning;
-		set => SetProperty(ref _getFilesAndLaunchPreviewWindowCommandIsRunning, value);
+		get => _getFilesAndLaunchPreviewWindowCommandIsExecuting;
+		set => SetProperty(ref _getFilesAndLaunchPreviewWindowCommandIsExecuting, value);
 	}
-	private bool _getFilesAndLaunchPreviewWindowCommandIsRunning = false;
+	private bool _getFilesAndLaunchPreviewWindowCommandIsExecuting = false;
 
 	public async Task GetFilePathsAndLaunchPreviewWindowAsync()
 	{
 		try
 		{
-			GetFilesAndLaunchPreviewWindowCommandIsRunning = true;
+			GetFilesAndLaunchPreviewWindowCommandIsExecuting = true;
 			Status = "Searching for files...";
 			await RunGetFilePathsAndLaunchPreviewWindowAsync();
 		}
 		finally
 		{
-			GetFilesAndLaunchPreviewWindowCommandIsRunning = false;
+			GetFilesAndLaunchPreviewWindowCommandIsExecuting = false;
 			Status = string.Empty;
 		}
 	}
@@ -161,7 +161,7 @@ public class MainWindowViewModel : ViewModelBase
 			PreviewSettings = previewSettings
 		};
 
-		await Task.Run(() => Thread.Sleep(10000));
+		await Task.Run(() => Thread.Sleep(5000));
 	}
 
 	private FileSearchSettings ConstructFileSearchSettings()
