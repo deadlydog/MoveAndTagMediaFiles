@@ -6,8 +6,11 @@ public class CommonServices : ICommonServices
 {
 	public IDialogService DialogService { get; }
 
-	public CommonServices(IDialogService dialogService)
+	public IViewModelChangerService ViewModelChanger { get; }
+
+	public CommonServices(IDialogService dialogService, IViewModelChangerService viewModelChangerService)
 	{
 		DialogService = dialogService;
+		ViewModelChanger = viewModelChangerService;
 	}
 }

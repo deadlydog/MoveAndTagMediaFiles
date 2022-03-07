@@ -5,7 +5,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:MoveAndTagMediaFilesWpfApp"
 		mc:Ignorable="d"
-		Title="Media Preview"
+		Title="{Binding Path=ViewModel.WindowTitle, Mode=OneWay}"
 		MinWidth="800"
 		MinHeight="450"
 		Width="{local:ApplicationSettingsBinding Path=PreviewWindow_Width}"
@@ -31,14 +31,14 @@
 				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 
-			<Button Grid.Column="0" x:Name="btnPreviousMediaFile" Content="&lt; Previous" Padding="5,0,5,0" Click="btnPreviousMediaFile_Click" />
-			<TextBlock Grid.Column="1" Text="{Binding Path=MediaFilesListLocationDisplay}" d:Text="20 of 100" HorizontalAlignment="Stretch" TextAlignment="Center" />
-			<CheckBox Grid.Column="2" x:Name="chkAutomaticallyProgressToNextMediaFile" Content="Progress Automatically" Margin="0,0,5,0" ToolTip="Automatically move to the next media file after copying/moving/updating a file" />
-			<Button Grid.Column="3" x:Name="btnNextMediaFile" Content="Next &gt;" Padding="5,0,5,0" Click="btnNextMediaFile_Click" />
+			<Button Grid.Column="0" Content="&lt; Previous" Command="{Binding Path=ViewModel.MoveToPreviousMediaFileCommand}" Padding="5,0,5,0" />
+			<TextBlock Grid.Column="1" Text="{Binding Path=ViewModel.MediaFilesListLocationDisplay}" d:Text="20 of 100" HorizontalAlignment="Stretch" TextAlignment="Center" />
+			<CheckBox Grid.Column="2" Content="Progress Automatically" IsChecked="{Binding Path=ViewModel.AutomaticallyProgressToNextMediaFile}" Margin="0,0,5,0" ToolTip="Automatically move to the next media file after copying/moving/updating a file" />
+			<Button Grid.Column="3" Content="Next &gt;" Command="{Binding Path=ViewModel.MoveToNextMediaFileCommand}" Padding="5,0,5,0" />
 		</Grid>
 
 		<Grid Grid.Row="2">
-			<Image x:Name="imgCurrentImage" Source="{Binding Path=CurrentMediaFilePair.SourceMediaFile.FilePath}" />
+			<Image x:Name="imgCurrentImage" Source="{Binding Path=ViewModel.CurrentMediaFilePair.SourceMediaFile.FilePath}" />
 		</Grid>
 
 		<Grid Grid.Row="4">
@@ -50,7 +50,7 @@
 				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 
-			<ListBox Grid.Column="0" x:Name="lstSourceMediaTags" IsEnabled="{Binding Path=CurrentMediaFilePair.SourceMediaFile.FileExists}">
+			<ListBox Grid.Column="0" x:Name="lstSourceMediaTags" IsEnabled="{Binding Path=ViewModel.CurrentMediaFilePair.SourceMediaFile.FileExists}">
 				<d:ListBox.Items>
 					<ListBoxItem Content="Molly" />
 					<ListBoxItem Content="Huey" />
@@ -60,7 +60,7 @@
 			<ListBox Grid.Column="1" x:Name="lstAllMediaTags" IsEnabled="True" />
 			<Button Grid.Column="2" Content="Copy" />
 			<Button Grid.Column="3" Content="Move" />
-			<ListBox Grid.Column="4" x:Name="lstDestinationMediaTags" IsEnabled="{Binding Path=CurrentMediaFilePair.DestinationMediaFile.FileExists}">
+			<ListBox Grid.Column="4" x:Name="lstDestinationMediaTags" IsEnabled="{Binding Path=ViewModel.CurrentMediaFilePair.DestinationMediaFile.FileExists}">
 				<d:ListBox.Items>
 					<ListBoxItem Content="Molly" />
 					<ListBoxItem Content="Huey" />

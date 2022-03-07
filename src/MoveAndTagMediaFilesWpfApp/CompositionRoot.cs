@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MoveAndTagMediaFiles;
 using MoveAndTagMediaFiles.Infrastructure.Services;
 using MoveAndTagMediaFiles.Services;
+using MoveAndTagMediaFiles.ViewModels;
 using MoveAndTagMediaFilesWpfApp.Infrastructure;
 using MoveAndTagMediaFilesWpfApp.Services;
 
@@ -15,11 +16,15 @@ public static class CompositionRoot
 
 		services.AddSingleton<IPersistData, FilePersistor>();
 
+		services.AddSingleton<IDialogService, DialogService>();
+		services.AddSingleton<IViewModelChangerService, ViewModelChangerService>();
+		services.AddTransient<ICommonServices, CommonServices>();
+
 		services.AddTransient<MainWindowViewModel>();
 		services.AddTransient<MainWindow>();
 
-		services.AddSingleton<IDialogService, DialogService>();
-		services.AddTransient<ICommonServices, CommonServices>();
+		services.AddTransient<PreviewWindowViewModel>();
+		services.AddTransient<PreviewWindow>();
 
 		return new ThrowIfNullServiceProvider(services.BuildServiceProvider());
 	}

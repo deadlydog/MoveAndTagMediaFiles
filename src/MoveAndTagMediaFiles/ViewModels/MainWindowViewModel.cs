@@ -8,7 +8,7 @@ namespace MoveAndTagMediaFiles;
 
 public class MainWindowViewModel : ViewModelBase
 {
-	public string WindowTitle { get => "Move and Tag Media Files v" + System.Reflection.Assembly.GetEntryAssembly()?.GetName().Version?.ToString(3); }
+	public string WindowTitle => "Move and Tag Media Files v" + System.Reflection.Assembly.GetEntryAssembly()?.GetName().Version?.ToString(3);
 
 	[Required]
 	public string SourceDirectory
@@ -154,7 +154,7 @@ public class MainWindowViewModel : ViewModelBase
 			PreviewSettings = previewSettings
 		};
 
-		await Task.Run(() => Thread.Sleep(5000));
+		ViewModelChanger.ShowViewModel(typeof(PreviewWindowViewModel), previewWindowArgs);
 	}
 
 	private FileSearchSettings ConstructFileSearchSettings()
