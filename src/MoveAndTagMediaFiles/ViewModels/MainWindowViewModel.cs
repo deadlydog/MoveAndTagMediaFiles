@@ -102,24 +102,17 @@ public class MainWindowViewModel : ViewModelBase
 	}
 
 	public IAsyncCommand GetFilesAndLaunchPreviewWindowCommand => new RelayCommandAsync(GetFilePathsAndLaunchPreviewWindowAsync);
-	public bool GetFilesAndLaunchPreviewWindowCommandIsExecuting
-	{
-		get => _getFilesAndLaunchPreviewWindowCommandIsExecuting;
-		set => SetProperty(ref _getFilesAndLaunchPreviewWindowCommandIsExecuting, value);
-	}
-	private bool _getFilesAndLaunchPreviewWindowCommandIsExecuting = false;
+
 
 	public async Task GetFilePathsAndLaunchPreviewWindowAsync()
 	{
 		try
 		{
-			GetFilesAndLaunchPreviewWindowCommandIsExecuting = true;
 			Status = "Searching for files...";
 			await RunGetFilePathsAndLaunchPreviewWindowAsync();
 		}
 		finally
 		{
-			GetFilesAndLaunchPreviewWindowCommandIsExecuting = false;
 			Status = string.Empty;
 		}
 	}

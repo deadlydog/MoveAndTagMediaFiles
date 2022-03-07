@@ -15,7 +15,11 @@ public class RelayCommandAsync<T> : PropertyChangedNotifier, IAsyncCommand<T>
 	public bool IsExecuting
 	{
 		get => _isExecuting;
-		set => SetProperty(ref _isExecuting, value);
+		set
+		{
+			SetProperty(ref _isExecuting, value);
+			RaiseCanExecuteChanged();
+		}
 	}
 	private bool _isExecuting;
 
@@ -46,8 +50,6 @@ public class RelayCommandAsync<T> : PropertyChangedNotifier, IAsyncCommand<T>
 				IsExecuting = false;
 			}
 		}
-
-		RaiseCanExecuteChanged();
 	}
 
 	public void RaiseCanExecuteChanged()
@@ -84,7 +86,11 @@ public class RelayCommandAsync : PropertyChangedNotifier, IAsyncCommand
 	public bool IsExecuting
 	{
 		get => _isExecuting;
-		set => SetProperty(ref _isExecuting, value);
+		set
+		{
+			SetProperty(ref _isExecuting, value);
+			RaiseCanExecuteChanged();
+		}
 	}
 	private bool _isExecuting;
 
@@ -115,8 +121,6 @@ public class RelayCommandAsync : PropertyChangedNotifier, IAsyncCommand
 				IsExecuting = false;
 			}
 		}
-
-		RaiseCanExecuteChanged();
 	}
 
 	public void RaiseCanExecuteChanged()
