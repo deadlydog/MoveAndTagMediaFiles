@@ -14,9 +14,8 @@ public class RelayCommand<T> : ICommand
 
 	public RelayCommand(Action<T> execute, Func<T, bool> canExecute)
 	{
-		ArgumentNullException.ThrowIfNull(execute, nameof(execute));
+		_execute = execute ?? throw new ArgumentNullException(nameof(execute), $"{nameof(execute)} action provided to {nameof(RelayCommand)} is null.");
 		_canExecute = canExecute;
-		_execute = execute;
 	}
 
 	public bool CanExecute(object parameter)
@@ -46,9 +45,8 @@ public class RelayCommand : ICommand
 
 	public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
 	{
-		ArgumentNullException.ThrowIfNull(execute, nameof(execute));
+		_execute = execute ?? throw new ArgumentNullException(nameof(execute), $"{nameof(execute)} action provided to {nameof(RelayCommand)} is null.");
 		_canExecute = canExecute;
-		_execute = execute;
 	}
 
 	public bool CanExecute(object parameter)

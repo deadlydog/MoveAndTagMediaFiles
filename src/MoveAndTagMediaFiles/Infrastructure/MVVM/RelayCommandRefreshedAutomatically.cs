@@ -13,9 +13,8 @@ public class RelayCommandRefreshedAutomatically<T> : ICommand
 
 	public RelayCommandRefreshedAutomatically(Action<T> execute, Func<T, bool> canExecute)
 	{
-		ArgumentNullException.ThrowIfNull(execute, nameof(execute));
+		_execute = execute ?? throw new ArgumentNullException(nameof(execute), $"{nameof(execute)} action provided to {nameof(RelayCommandRefreshedAutomatically)} is null.");
 		_canExecute = canExecute;
-		_execute = execute;
 	}
 
 	public bool CanExecute(object parameter)
@@ -42,9 +41,8 @@ public class RelayCommandRefreshedAutomatically : ICommand
 
 	public RelayCommandRefreshedAutomatically(Action<object> execute, Func<object, bool> canExecute = null)
 	{
-		ArgumentNullException.ThrowIfNull(execute, nameof(execute));
+		_execute = execute ?? throw new ArgumentNullException(nameof(execute), $"{nameof(execute)} action provided to {nameof(RelayCommandRefreshedAutomatically)} is null.");
 		_canExecute = canExecute;
-		_execute = execute;
 	}
 
 	public bool CanExecute(object parameter)

@@ -16,11 +16,9 @@ public class PreviewWindowViewModel : ViewModelBase
 	public PreviewWindowViewModel(ICommonServices commonServices, PreviewWindowViewModelArguments args) : base(commonServices)
 	{
 		ArgumentNullException.ThrowIfNull(args, nameof(args));
-		ArgumentNullException.ThrowIfNull(args.MediaFilePaths, nameof(args.MediaFilePaths));
-		ArgumentNullException.ThrowIfNull(args.PreviewSettings, nameof(args.PreviewSettings));
 
-		MediaFilePaths = args.MediaFilePaths;
-		PreviewSettings = args.PreviewSettings;
+		MediaFilePaths = args.MediaFilePaths ?? throw new ArgumentNullException(nameof(args.MediaFilePaths), "MediaFilePaths list is null");
+		PreviewSettings = args.PreviewSettings ?? throw new ArgumentNullException(nameof(args.PreviewSettings), "PreviewSettings is null");
 	}
 
 	public RelayCommandAsync MoveToPreviousMediaFileCommand =>

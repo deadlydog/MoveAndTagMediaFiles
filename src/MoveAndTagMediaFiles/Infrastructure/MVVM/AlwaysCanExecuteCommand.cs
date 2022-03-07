@@ -10,8 +10,7 @@ namespace MoveAndTagMediaFiles.Infrastructure.MVVM
 
 		public AlwaysCanExecuteCommand(Action<T> execute)
 		{
-			ArgumentNullException.ThrowIfNull(execute, nameof(execute));
-			_execute = execute;
+			_execute = execute ?? throw new ArgumentNullException(nameof(execute), $"{nameof(execute)} action provided to {nameof(AlwaysCanExecuteCommand)} is null.");
 		}
 
 		public bool CanExecute(object parameter)
@@ -38,8 +37,7 @@ namespace MoveAndTagMediaFiles.Infrastructure.MVVM
 
 		public AlwaysCanExecuteCommand(Action execute)
 		{
-			ArgumentNullException.ThrowIfNull(execute, nameof(execute));
-			_execute = execute;
+			_execute = execute ?? throw new ArgumentNullException(nameof(execute), $"{nameof(execute)} action provided to {nameof(AlwaysCanExecuteCommand)} is null.");
 		}
 
 		public bool CanExecute(object parameter)

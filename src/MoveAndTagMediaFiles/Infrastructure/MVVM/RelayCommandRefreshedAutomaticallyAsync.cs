@@ -23,8 +23,7 @@ public class RelayCommandRefreshedAutomaticallyAsync<T> : PropertyChangedNotifie
 
 	public RelayCommandRefreshedAutomaticallyAsync(Func<T, Task> execute, Func<T, bool> canExecute = null, IErrorHandler errorHandler = null)
 	{
-		ArgumentNullException.ThrowIfNull(execute, nameof(execute));
-		_execute = execute;
+		_execute = execute ?? throw new ArgumentNullException(nameof(execute), $"{nameof(execute)} action provided to {nameof(RelayCommandRefreshedAutomaticallyAsync)} is null.");
 		_canExecute = canExecute;
 		_errorHandler = errorHandler;
 	}
@@ -89,8 +88,7 @@ public class RelayCommandRefreshedAutomaticallyAsync : PropertyChangedNotifier, 
 
 	public RelayCommandRefreshedAutomaticallyAsync(Func<Task> execute, Func<bool> canExecute = null, IErrorHandler errorHandler = null)
 	{
-		ArgumentNullException.ThrowIfNull(execute, nameof(execute));
-		_execute = execute;
+		_execute = execute ?? throw new ArgumentNullException(nameof(execute), $"{nameof(execute)} action provided to {nameof(RelayCommandRefreshedAutomaticallyAsync)} is null.");
 		_canExecute = canExecute;
 		_errorHandler = errorHandler;
 	}
